@@ -5,6 +5,15 @@ public class POBean {
 	private String userID;
 	private POStatus status;
 	private int addressID;
+	
+	public POBean(int id, String userID, POStatus status, int addressID) {
+		super();
+		this.id = id;
+		this.userID = userID;
+		this.status = status;
+		this.addressID = addressID;
+	}
+	
 	public int getId() {
 		return id;
 	}

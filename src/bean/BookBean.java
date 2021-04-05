@@ -7,8 +7,8 @@ public class BookBean {
 		private double price;
 		private int quantitySold;
 		
-		public BookBean(String bid, String title, String author, BookType category, String picture, String description,
-				double price, int quantitySold) {
+		public BookBean(String bid, String title, double price, String author, 
+						BookType category, String picture, String description, int quantitySold) {
 			super();
 			this.bid = bid;
 			this.title = title;

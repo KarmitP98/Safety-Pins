@@ -6,7 +6,7 @@ public class ReviewBean {
 	private String bid, subject, description;
 	private double rating;
 	
-	public ReviewBean(int id, int userID, String bid, String subject, String description, double rating) {
+	public ReviewBean(int id, String bid, int uId, double rating, String subject, String description) {
 		super();
 		this.id = id;
 		this.userID = userID;
