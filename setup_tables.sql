@@ -11,7 +11,8 @@ DROP TABLE if exists VisitEvent;
 DROP TABLE if exists Book;
 DROP TABLE IF EXISTS User;
 
-use final;
+use
+final;
 /** bid: unique identifier of Book (like ISBN)
 * title: title of Book
 * price: unit price WHEN ordered
@@ -23,14 +24,14 @@ use final;
 */
 CREATE TABLE Book
 (
-    bid         VARCHAR(20)                                                      NOT NULL,
-    title       VARCHAR(60)                                                      NOT NULL,
-    price       double                                                           NOT NULL,
-    author      varchar(50)                                                      not null,
+    bid         VARCHAR(20)    NOT NULL,
+    title       VARCHAR(60)    NOT NULL,
+    price       double         NOT NULL,
+    author      varchar(50)    not null,
     category    ENUM ('Science','Fiction','Engineering','Maths','Modern','Kids') NOT NULL,
-    picture     varchar(1000)                                                    not null,
-    description varchar(10000)                                                   not null default 'Welcome to Book World!',
-    sold        int                                                                       default 0,
+    picture     varchar(1000)  not null,
+    description varchar(10000) not null default 'Welcome to Book World!',
+    sold        int                     default 0,
     PRIMARY KEY (bid),
     constraint Sold check ( sold >= 0 )
 );
@@ -79,10 +80,10 @@ VALUES (3, '789 Keele St.', 'ON',
 */
 CREATE TABLE PO
 (
-    id      INT UNSIGNED                          NOT NULL AUTO_INCREMENT,
-    uId     VARCHAR(20)                           NOT NULL references User.id,
+    id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    uId     VARCHAR(20) NOT NULL references User.id,
     status  ENUM ('ORDERED','PROCESSED','DENIED') NOT NULL,
-    address INT UNSIGNED                          NOT NULL,
+    address INT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
     INDEX (address),
     FOREIGN KEY (address) REFERENCES Address (id) ON DELETE CASCADE
@@ -106,7 +107,7 @@ VALUES (3, 2, 'ORDERED', '3');
 CREATE TABLE POItem
 (
     id       INT UNSIGNED NOT NULL,
-    bid      VARCHAR(20)  NOT NULL,
+    bid      VARCHAR(20) NOT NULL,
     price    INT UNSIGNED NOT NULL,
     quantity int unsigned not null default 1,
     PRIMARY KEY (id, bid),
@@ -134,8 +135,8 @@ VALUES (3, 'b003', '100');
 */
 CREATE TABLE VisitEvent
 (
-    day       varchar(8)                      NOT NULL,
-    bid       varchar(20)                     not null REFERENCES Book.bid,
+    day       varchar(8)  NOT NULL,
+    bid       varchar(20) not null REFERENCES Book.bid,
     eventtype ENUM ('VIEW','CART','PURCHASE') NOT NULL,
     FOREIGN KEY (bid) REFERENCES Book (bid)
 );

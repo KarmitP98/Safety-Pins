@@ -1,78 +1,76 @@
 package bean;
 
 public class AddressBean {
-	
-	private int id, userID;
-	private String street, province, country, zip, phone;
-	
-	public AddressBean(int id, int userID, String street, String province, String country, String zip, String phone) {
-		super();
-		this.id = id;
-		this.userID = userID;
-		this.street = street;
-		this.province = province;
-		this.country = country;
-		this.zip = zip;
-		this.phone = phone;
-	}
 
-	public int getId() {
-		return id;
-	}
+    private int id, userID;
+    private String street, province, country, zip, phone;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public AddressBean(int id, int userID, String street, String province, String country, String zip, String phone) {
+        super();
+        this.id = id;
+        this.userID = userID;
+        this.street = street;
+        this.province = province;
+        this.country = country;
+        this.zip = zip;
+        this.phone = phone;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public int getUserID() {
+        return userID;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
-	public String getProvince() {
-		return province;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setProvince(String province) {
-		this.province = province;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getProvince() {
+        return province;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setProvince(String province) {
+        this.province = province;
+    }
 
-	public String getZip() {
-		return zip;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getZip() {
+        return zip;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	
-	
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
 }

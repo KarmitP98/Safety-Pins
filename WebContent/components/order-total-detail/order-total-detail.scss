@@ -1,0 +1,64 @@
+.card {
+  position: relative;
+  display: flex;
+
+  flex-flow: column;
+
+  padding: 1em;
+
+  width: fit-content;
+  height: fit-content;
+
+  background: white;
+
+  border-radius: 10px;
+  box-shadow: var(--0-4-16-black);
+
+  min-width: 300px;
+}
+
+.card-title {
+  font-size: 1.2em;
+  color: var(--darktext);
+  background: none;
+
+  margin-bottom: 0.5em;
+}
+
+.card-body {
+  padding: 0 1em;
+
+  letter-spacing: 1px;
+}
+
+button.button {
+  width: 100%;
+}
+
+.card-list {
+  display: flex;
+
+  flex-flow: column;
+  width: 100%;
+  height: fit-content;
+  padding: 1em 0;
+}
+
+.card-list-item {
+  display: flex;
+
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0.25em 0;
+}
+
+.values {
+  font-weight: bold;
+}
+
+#order-total span {
+  color: var(--primary);
+}
