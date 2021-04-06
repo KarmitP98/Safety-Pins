@@ -4,23 +4,23 @@
 
   flex-flow: column;
 
+  width: fit-content;
+
+  height: fit-content;
   padding: 1em;
 
-  width: fit-content;
-  height: fit-content;
+  border-radius: 10px;
 
   background: white;
-
-  border-radius: 10px;
   box-shadow: var(--0-4-16-black);
 }
 
 .card-title {
   font-size: 1.2em;
-  color: var(--darktext);
-  background: none;
-
   margin-bottom: 0.5em;
+  color: var(--darktext);
+
+  background: none;
 }
 
 .card-subtitle {

@@ -1,12 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
   font-family: 'Epilogue', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  width: 100%;
+  height: 100%;
   background: var(--background);
 }
 
@@ -25,76 +27,76 @@ body {
 }
 
 fieldset {
-  display: flex;
   position: relative;
+  display: flex;
 
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  border: none;
+  width: 40%;
 
-  background: white;
+  height: 60%;
 
   padding: 0.5em 1em;
 
-  border-radius: 5px;
+  border: none;
 
-  width: 40%;
-  height: 60%;
+  border-radius: 5px;
+  background: white;
 
   box-shadow: var(--0-4-16-red);
 
 
   input {
-    border: none;
+	font-size: 1.2em;
 
-    background: transparent;
+	width: 100%;
 
-    font-size: 1.2em;
+	height: 100%;
 
-    width: 100%;
-    height: 100%;
+	border: none;
+	background: transparent;
 
-    &:focus {
-      outline: none;
-    }
+	&:focus {
+	  outline: none;
+	}
   }
 
   span {
-    cursor: pointer;
-    user-select: none;
+	cursor: pointer;
+	user-select: none;
   }
 }
 
 .button {
-  display: flex;
-  position: relative;
+  font-size: 1.1em;
+  font-weight: bold;
 
-  justify-content: center;
+  position: relative;
+  display: flex;
+
   align-items: center;
 
-  padding: 0.5em 1em;
-
+  justify-content: center;
   width: fit-content;
+
   height: fit-content;
 
-  font-size: 1.1em;
-
-  background: transparent;
-  border: none;
-  border-radius: 5px;
-
-  box-shadow: var(--0-4-16-black);
-
-  font-weight: bold;
+  padding: 0.5em 1em;
+  cursor: pointer;
   letter-spacing: 1px;
 
-  cursor: pointer;
+  border: none;
+
+  border-radius: 5px;
+  background: transparent;
+
+  box-shadow: var(--0-4-16-black);
 }
 
 .button-primary {
-  background: var(--primary);
   color: white;
+  background: var(--primary);
 
   box-shadow: var(--0-4-16-red);
 }
@@ -103,14 +105,14 @@ fieldset {
   width: 100%;
   height: 1px;
 
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 500px;
-
   margin: 0.5em 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  border-radius: 500px;
 }
 
 .center-line {
-  border: 1px solid rgba(0, 0, 0, 0.2);
   width: 1px;
   height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }

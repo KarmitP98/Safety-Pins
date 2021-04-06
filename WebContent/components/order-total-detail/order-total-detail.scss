@@ -4,25 +4,25 @@
 
   flex-flow: column;
 
-  padding: 1em;
-
   width: fit-content;
-  height: fit-content;
-
-  background: white;
-
-  border-radius: 10px;
-  box-shadow: var(--0-4-16-black);
 
   min-width: 300px;
+  height: fit-content;
+
+  padding: 1em;
+
+  border-radius: 10px;
+  background: white;
+
+  box-shadow: var(--0-4-16-black);
 }
 
 .card-title {
   font-size: 1.2em;
-  color: var(--darktext);
-  background: none;
-
   margin-bottom: 0.5em;
+  color: var(--darktext);
+
+  background: none;
 }
 
 .card-body {
@@ -47,10 +47,10 @@ button.button {
 .card-list-item {
   display: flex;
 
-  width: 100%;
+  align-items: center;
 
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
 
   margin: 0.25em 0;
 }

@@ -1,11 +1,11 @@
 .body {
-  display: flex;
   position: relative;
-
-  width: 100%;
-  height: fit-content;
+  display: flex;
 
   flex-flow: column;
+  width: 100%;
+
+  height: fit-content;
 
   padding: 2em;
 
@@ -21,7 +21,7 @@
 }
 
 .remove-link {
-  color: var(--primary);
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: underline;
+  color: var(--primary);
 }

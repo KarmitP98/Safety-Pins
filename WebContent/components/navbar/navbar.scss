@@ -1,6 +1,6 @@
 nav {
-  display: flex;
   position: relative;
+  display: flex;
 
   width: 100%;
   height: 10vh;
@@ -12,71 +12,71 @@ nav {
   position: relative;
   display: flex;
 
+  align-items: center;
+  justify-content: space-between;
+
   width: 80%;
+
   height: 100%;
 
   margin-left: 10%;
-
   background: transparent;
-
-  align-items: center;
-  justify-content: space-between;
 }
 
 .options-area {
-  display: flex;
   position: relative;
+  display: flex;
 
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   width: 120px;
   height: 70%;
 
   padding: 16px;
 
+  border-radius: 10px;
   background: var(--primary);
+
   box-shadow: var(--0-4-16-red);
 
-  border-radius: 10px;
-
   span.material-icons {
-    position: relative;
-    color: white;
-    font-size: 1.7em;
-    font-weight: 500;
+	font-size: 1.7em;
+	font-weight: 500;
+	position: relative;
+	z-index: 2;
 
-    cursor: pointer;
-    user-select: none;
+	cursor: pointer;
+	user-select: none;
 
-    z-index: 2;
+	color: white;
   }
 
   span.material-icons > .badge {
-    position: absolute;
-    display: flex;
+	font-size: 12px;
+	font-weight: bold;
 
-    top: -30%;
-    right: -50%;
+	position: absolute;
+	z-index: 1;
 
-    justify-content: center;
-    align-items: center;
+	top: -30%;
+	right: -50%;
 
-    font-size: 12px;
-    font-weight: bold;
+	display: flex;
+	align-items: center;
 
-    height: 20px;
-    width: 20px;
+	justify-content: center;
+	width: 20px;
 
-    padding: 2px;
+	height: 20px;
 
-    background: var(--warning);
-    color: var(--darktext);
+	padding: 2px;
+	color: var(--darktext);
 
-    border-radius: 50%;
-    z-index: 1;
+	border-radius: 50%;
+	background: var(--warning);
 
-    box-shadow: var(--0-4-16-black);
+	box-shadow: var(--0-4-16-black);
   }
 
 
@@ -84,19 +84,19 @@ nav {
 
 
 #logo {
-  display: flex;
   position: relative;
+  display: flex;
 
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   width: auto;
   height: 100%;
 
   img {
-    width: auto;
-    height: 100%;
+	width: auto;
+	height: 100%;
 
-    cursor: pointer;
+	cursor: pointer;
   }
 }
