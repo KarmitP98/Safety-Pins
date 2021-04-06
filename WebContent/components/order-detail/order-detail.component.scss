@@ -1,0 +1,27 @@
+.body{
+  display: flex;
+  position: relative;
+
+  width: 100%;
+  height: fit-content;
+
+  flex-flow: column;
+
+  padding: 2em;
+
+  border: 2px solid rgba(0,0,0,.5);
+  border-radius: 10px;
+
+}
+
+.title{
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+}
+
+.remove-link{
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+}

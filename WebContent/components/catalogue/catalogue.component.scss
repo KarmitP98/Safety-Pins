@@ -1,0 +1,19 @@
+.content-area{
+  display: flex;
+  position: absolute;
+
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  width: 50vw;
+  min-height: 90vh;
+
+  top: 10vh;
+  left: 50vw;
+
+  flex-flow: row wrap;
+
+  transform: translate(-50%);
+
+  background: var(--background);
+}

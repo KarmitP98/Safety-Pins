@@ -1,0 +1,33 @@
+.card{
+  position: relative;
+  display: flex;
+
+  flex-flow: column;
+
+  padding: 1em;
+
+  width: fit-content;
+  height: fit-content;
+
+  background: white;
+
+  border-radius: 10px;
+  box-shadow: var(--0-4-16-black);
+}
+.card-title{
+  font-size: 1.2em;
+  color: var(--darktext);
+  background: none;
+
+  margin-bottom: 0.5em;
+}
+
+.card-subtitle{
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--headings);
+  background: none;
+}
+.card-body button.button{
+  width: 100%;
+}
