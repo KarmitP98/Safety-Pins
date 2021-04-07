@@ -12,20 +12,16 @@ import javax.sql.DataSource;
 import bean.AddressBean;
 import bean.ReviewBean;
 
-public class AddressDAO {
+public class AddressDAO extends DAO{
 
 
-	private DataSource ds;
+	
 	
 	public AddressDAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	public AddressBean retrieveAddressByUserId(int uid) throws SQLException {
 		
 	String query = "select * from Address where uId=" +uid;

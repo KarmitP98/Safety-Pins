@@ -15,20 +15,14 @@ import javax.sql.DataSource;
 import bean.ReviewBean;
 import bean.UserBean;
 
-public class ReviewDAO {
+public class ReviewDAO extends DAO{
 
 	
-	private DataSource ds;
 	
 	public ReviewDAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
 	public ReviewBean retrieveReview(int uid, String bid) throws SQLException {
 		String query = "select * from review where uId=" + uid + "and bId=" + bid;
 		

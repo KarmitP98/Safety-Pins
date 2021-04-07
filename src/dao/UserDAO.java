@@ -13,19 +13,16 @@ import javax.sql.DataSource;
 
 import bean.UserBean;
 
-public class UserDAO {
+public class UserDAO extends DAO{
 	
-	private DataSource ds;
 	
 	public UserDAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
+
+
+
 	public UserBean retrieveByEmail(String userEmail) throws SQLException {
 			
 			String query = "select * from user where email =" + userEmail;

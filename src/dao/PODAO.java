@@ -17,19 +17,15 @@ import bean.POItemBean;
 import bean.POStatus;
 import bean.UserBean;
 
-public class PODAO {
+public class PODAO extends DAO{
 	
-	private DataSource ds;
+	
 	
 	public PODAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	public POBean retrievePOByID(int pid) throws SQLException {
 		
 		String query = "select * from PO where id =" + pid;
@@ -73,7 +69,7 @@ public class PODAO {
 	
 	public ArrayList<POItemBean> retrievePOItemsById(int id) throws SQLException {
 		
-		String query = "select * where id=" + id;
+		String query = "select * from POItem where id=" + id;
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
 		ResultSet r = p.executeQuery();
@@ -84,6 +80,7 @@ public class PODAO {
 			String bid = r.getString("bid");
 			int price = r.getInt("price");
 			int quantity = r.getInt("quantity");
+			
 			
 			items.add(new POItemBean(id, bid, price, quantity));
 		}

@@ -10,20 +10,15 @@ import javax.sql.DataSource;
 
 import bean.VisitEventType;
 
-public class VisitEventDAO {
+public class VisitEventDAO extends DAO {
+
 
 	
-	private DataSource ds;
-	
 	public VisitEventDAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void addVisitEvent(String day, String bid, VisitEventType type) throws SQLException {
 		String query = "insert into VisitEvent values(?,?,?)";
 		Connection con = this.ds.getConnection();

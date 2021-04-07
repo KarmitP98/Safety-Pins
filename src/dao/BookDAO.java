@@ -17,24 +17,17 @@ import bean.BookBean;
 import bean.BookType;
 import bean.UserBean;
 
-public class BookDAO {
+public class BookDAO extends DAO {
 
-	private DataSource ds;
+
+	
+
 	
 	public BookDAO() throws ClassNotFoundException {
-		try {
-		ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		} catch (NamingException e) {
-			e.printStackTrace();
-			
-		}
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	// methods to be added
-	
 
-	
 	public BookBean retrieveBookByID(String bookID) throws SQLException {
 		
 		String query = "select * from Book where bid=" + bookID;
