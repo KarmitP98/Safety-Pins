@@ -2,69 +2,67 @@ package bean;
 
 public class ReviewBean {
 
-	private int id, userID;
-	private String bid, subject, description;
-	private double rating;
-	
-	public ReviewBean(int id, String bid, int uId, double rating, String subject, String description) {
-		super();
-		this.id = id;
-		this.userID = userID;
-		this.bid = bid;
-		this.subject = subject;
-		this.description = description;
-		this.rating = rating;
-	}
+    private int id, userID;
+    private String bid, subject, description;
+    private double rating;
 
-	public int getId() {
-		return id;
-	}
+    public ReviewBean(int id, String bid, int uId, double rating, String subject, String description) {
+        super();
+        this.id = id;
+        this.userID = userID;
+        this.bid = bid;
+        this.subject = subject;
+        this.description = description;
+        this.rating = rating;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+    public int getUserID() {
+        return userID;
+    }
 
-	public String getBid() {
-		return bid;
-	}
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
-	public void setBid(String bid) {
-		this.bid = bid;
-	}
+    public String getBid() {
+        return bid;
+    }
 
-	public String getSubject() {
-		return subject;
-	}
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+    public String getSubject() {
+        return subject;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public double getRating() {
-		return rating;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setRating(double rating) {
-		this.rating = rating;
-	}
-	
-	
-	
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
 
 }

@@ -2,39 +2,39 @@ package bean;
 
 public class VisitEventBean {
 
-	private String day, bid;
-	private VisitEventType eventType;
-	
-	public String getDay() {
-		return day;
-	}
+    private String day, bid;
+    private VisitEventType eventType;
 
-	public void setDay(String day) {
-		this.day = day;
-	}
+    public VisitEventBean(String day, String bid, VisitEventType eventType) {
+        super();
+        this.day = day;
+        this.bid = bid;
+        this.eventType = eventType;
+    }
 
-	public String getBid() {
-		return bid;
-	}
+    public String getDay() {
+        return day;
+    }
 
-	public void setBid(String bid) {
-		this.bid = bid;
-	}
+    public void setDay(String day) {
+        this.day = day;
+    }
 
-	public VisitEventType getEventType() {
-		return eventType;
-	}
+    public String getBid() {
+        return bid;
+    }
 
-	public void setEventType(VisitEventType eventType) {
-		this.eventType = eventType;
-	}
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
 
-	public VisitEventBean(String day, String bid, VisitEventType eventType) {
-		super();
-		this.day = day;
-		this.bid = bid;
-		this.eventType = eventType;
-	}
-	
-	
+    public VisitEventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(VisitEventType eventType) {
+        this.eventType = eventType;
+    }
+
+
 }

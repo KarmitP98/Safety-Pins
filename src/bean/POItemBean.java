@@ -1,52 +1,50 @@
 package bean;
 
 public class POItemBean {
-	
-	private int id;
-	private String bid;
-	private int price, quantity;
-	
-	public POItemBean(int id, String bid, int price, int quantity) {
-		super();
-		this.id = id;
-		this.bid = bid;
-		this.price = price;
-		this.quantity = quantity;
-	}
 
-	public int getId() {
-		return id;
-	}
+    private int id;
+    private String bid;
+    private int price, quantity;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public POItemBean(int id, String bid, int price, int quantity) {
+        super();
+        this.id = id;
+        this.bid = bid;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
-	public String getBid() {
-		return bid;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setBid(String bid) {
-		this.bid = bid;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public String getBid() {
+        return bid;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	
-	
-	
-	
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
 }
