@@ -26,12 +26,13 @@ public class AddressDAO extends DAO{
 
 	public AddressBean retrieveAddressByUserId(int uid) throws SQLException {
 		
-	String query = "select * from Address where uId=" +uid;
+	String query = "select * from Address where uid=?";
 		
 		AddressBean address = null;
 		
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setInt(1, uid);
 		ResultSet r = p.executeQuery();
 		
 		while (r.next()) {

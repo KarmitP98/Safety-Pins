@@ -3,12 +3,12 @@ package bean;
 public class BookBean {
 
     private String bid, title, author, picture, description;
-    private BookType category;
+    private String category;
     private double price;
     private int quantitySold;
 
     public BookBean(String bid, String title, double price, String author,
-                    BookType category, String picture, String description, int quantitySold) {
+                    String category, String picture, String description, int quantitySold) {
         super();
         this.bid = bid;
         this.title = title;
@@ -44,12 +44,12 @@ public class BookBean {
         this.author = author;
     }
 
-    public BookType getCategory() {
+    public String getCategory() {
         return category;
 
     }
 
-    public void setCategory(BookType category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

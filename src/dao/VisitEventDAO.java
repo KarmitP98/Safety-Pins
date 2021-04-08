@@ -1,6 +1,6 @@
 package dao;
 
-import bean.VisitEventType;
+
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,7 +23,7 @@ public class VisitEventDAO extends DAO {
 	// get listofVisitEvents by
 
 
-    public void addVisitEvent(String day, String bid, VisitEventType type) throws SQLException {
+    public void addVisitEvent(String day, String bid, String type) throws SQLException {
         String query = "insert into VisitEvent values(?,?,?)";
         Connection con = this.ds.getConnection();
         PreparedStatement stmt = con.prepareStatement(query);
@@ -38,5 +38,6 @@ public class VisitEventDAO extends DAO {
 
     // to be added
     // get listofVisitEvents by
+    
 
 }

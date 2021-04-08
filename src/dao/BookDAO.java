@@ -1,7 +1,7 @@
 package dao;
 
 import bean.BookBean;
-import bean.BookType;
+
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -26,26 +26,26 @@ public class BookDAO extends DAO {
 
 	public BookBean retrieveBookByID(String bookID) throws SQLException {
 		
-		String query = "select * from Book where bid=" + bookID;
-		BookBean bb = null;
+		String query = "select * from Book where bid = ?";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setString(1, bookID);
 		ResultSet r = p.executeQuery();
 		
-		while (r.next()) {
-			
-			String bid = r.getString("bid");
+		BookBean bb = null;
+		
+		while(r.next()) {
 			String title = r.getString("title");
 			double price = r.getDouble("price");
 			String author = r.getString("author");
 			
-			BookType category = BookType.valueOf(r.getString("category"));
+			String category = r.getString("category");
 			
 			String picture = r.getString("picture");
 			String description = r.getString("description");
 			int quantitySold = r.getInt("sold");
 			
-			bb = new BookBean(bid, title, price, author, category, picture, description, quantitySold);
+			bb = new BookBean(bookID, title, price, author, category, picture, description, quantitySold);
 		
 		}
 		r.close();
@@ -70,7 +70,7 @@ public class BookDAO extends DAO {
 			double price = r.getDouble("price");
 			String author = r.getString("author");
 			
-			BookType category = BookType.valueOf(r.getString("category"));
+			String category = r.getString("category");
 			
 			String picture = r.getString("picture");
 			String description = r.getString("description");
@@ -89,8 +89,8 @@ public class BookDAO extends DAO {
 		
 	}
 	
-	public List<BookBean> retrieveBooksByCategory(BookType type) throws SQLException {
-		String query = "select * from Book where category like '%" + type +"%'";
+	public List<BookBean> retrieveBooksByCategory(String string) throws SQLException {
+		String query = "select * from Book where category like '%" + string +"%'";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
 		ResultSet r = p.executeQuery();
@@ -104,7 +104,7 @@ public class BookDAO extends DAO {
 			double price = r.getDouble("price");
 			String author = r.getString("author");
 			
-			BookType category = BookType.valueOf(r.getString("category"));
+			String category = r.getString("category");
 			
 			String picture = r.getString("picture");
 			String description = r.getString("description");
@@ -119,5 +119,72 @@ public class BookDAO extends DAO {
 		con.close();
 		
 		return list;
+	}
+	
+	
+	public ArrayList<BookBean> searchBooksByTitleOrAuthor(String keyword) throws SQLException {
+		
+		String query = "select * from Book where title like '%" + keyword + "%' or author like '%" + keyword +"%'";
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con.prepareStatement(query);
+		ResultSet r = p.executeQuery();
+		ArrayList<BookBean> books = new ArrayList<BookBean>();
+		
+		while(r.next()) {
+			
+			String bid = r.getString("bid");
+			String title = r.getString("title");
+			double price = r.getDouble("price");
+			String author = r.getString("author");
+			
+			String category = r.getString("category");
+			
+			String picture = r.getString("picture");
+			String description = r.getString("description");
+			int quantitySold = r.getInt("sold");
+			
+			
+			books.add(new BookBean(bid, title, price, author, category, picture, description, quantitySold));
+			
+		}
+		
+		return books;
+		
+	}
+	
+	public void updateQuantitySold(String bid, int quantitySold) throws SQLException {
+		BookBean book = this.retrieveBookByID(bid);
+		String query = "update Book set sold = ? where bid= ?";
+		
+		Connection con = this.ds.getConnection();
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setInt(1, quantitySold + book.getQuantitySold());
+		stmt.setString(2, bid);
+		
+		stmt.executeUpdate();
+	}
+	
+	public ArrayList<BookBean> top10() throws SQLException {
+		
+		String query = "select top 10 * from Book order by sold desc";	
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con.prepareStatement(query);
+		ResultSet r = p.executeQuery();
+		ArrayList<BookBean> books = new ArrayList<BookBean>();	
+		
+		while(r.next()) {
+			String bid = r.getString("bid");
+			String title = r.getString("title");
+			double price = r.getDouble("price");
+			String author = r.getString("author");
+			
+			String category = r.getString("category");
+			
+			String picture = r.getString("picture");
+			String description = r.getString("description");
+			int quantitySold = r.getInt("sold");
+			books.add(new BookBean(bid, title, price, author, category, picture, description, quantitySold));
+		}
+		return books;
 	}
 }

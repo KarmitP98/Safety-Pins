@@ -8,29 +8,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 
-@Path("Rest")
+@Path("restServices")
 public class RestServices {
 
     @GET
-    @Path("getProductInfo")
+    @Path("/getProductInfo/")
     @Produces("text/plain")
-    public String getProductInfo(@QueryParam("productId") String productId) throws Exception {
-
-        // return product information as json file
-
+    public String getProductInfo(@QueryParam("productId") String productId) throws Exception { 	
         return MainModel.getInstance().getProductInfo(productId);
     }
 
     @GET
-    @Path("getOrdersByPartNumber")
+    @Path("/getOrdersByPartNumber/")
     @Produces("text/plain")
     public String getOrdersByPartNumber(@QueryParam("productId") String productId) throws Exception {
-
-
-        // return json strings of all orders that have bid
-
-
-        return null;
+       return MainModel.getInstance().getOrdersByPartNumber(productId);
     }
 
 }

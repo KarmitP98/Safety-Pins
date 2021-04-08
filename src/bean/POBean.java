@@ -3,10 +3,10 @@ package bean;
 public class POBean {
     private int id;
     private String userID;
-    private POStatus status;
+    private String status;
     private int addressID;
 
-    public POBean(int id, String userID, POStatus status, int addressID) {
+    public POBean(int id, String userID, String status, int addressID) {
         super();
         this.id = id;
         this.userID = userID;
@@ -30,11 +30,11 @@ public class POBean {
         this.userID = userID;
     }
 
-    public POStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(POStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

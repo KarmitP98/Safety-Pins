@@ -18,9 +18,10 @@ public class CardDAO extends DAO {
 	}
 	
 	public CardBean retrieveByUserId(int uid) throws SQLException {
-		String query = "select * from card where uid=" + uid;
+		String query = "select * from card where uid= ?";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setInt(1, uid);
 		ResultSet r = p.executeQuery();
 		
 		CardBean card = null;

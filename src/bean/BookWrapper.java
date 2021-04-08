@@ -1,9 +1,12 @@
 package bean;
 
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
 
 @XmlRootElement(name = "bookReport")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BookWrapper {
     @XmlAttribute(name = "bid")
     private String bid;
@@ -20,15 +23,17 @@ public class BookWrapper {
     private String description;
 
     @XmlAttribute(name = "category")
-    private BookType category;
+    private String category;
     @XmlAttribute(name = "price")
     private double price;
     @XmlAttribute(name = "quantitySold")
     private int quantitySold;
 
-
+    public BookWrapper() {
+    	
+    }
     public BookWrapper(String bid, String title, double price, String author,
-                       BookType category, String picture, String description, int quantitySold) {
+                       String category, String picture, String description, int quantitySold) {
         super();
         this.bid = bid;
         this.title = title;
@@ -91,12 +96,12 @@ public class BookWrapper {
     }
 
 
-    public BookType getCategory() {
+    public String getCategory() {
         return category;
     }
 
 
-    public void setCategory(BookType category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

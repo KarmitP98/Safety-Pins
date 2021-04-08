@@ -1,11 +1,7 @@
 package model;
 
-import bean.BookBean;
-import bean.BookType;
-import bean.BookWrapper;
-import bean.UserBean;
-import dao.BookDAO;
-import dao.UserDAO;
+import bean.*;
+import dao.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
@@ -16,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainModel {
@@ -23,6 +20,11 @@ public class MainModel {
     private static MainModel instance;
     private UserDAO userDAO;
     private BookDAO bookDAO;
+    private CardDAO cardDAO;
+    private PODAO poDAO;
+    private VisitEventDAO visitEventDAO;
+    private ReviewDAO reviewDAO;
+    private AddressDAO addressDAO;
     //DAOs need to be declared
 
     private MainModel() {
@@ -31,6 +33,11 @@ public class MainModel {
 
             this.userDAO = new UserDAO();
             this.bookDAO = new BookDAO();
+            this.addressDAO = new AddressDAO();
+            this.cardDAO = new CardDAO();
+            this.poDAO = new PODAO();
+            this.visitEventDAO = new VisitEventDAO();
+            this.reviewDAO = new ReviewDAO();
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -44,22 +51,24 @@ public class MainModel {
 
         if (instance == null) {
             instance = new MainModel();
-
-            // DAOs need to be instantiated
         }
-
         return instance;
-
     }
-
 
     /*
      * User
      */
 
     // save the users information in the session scope.
-    public void logIn(HttpServletRequest request, String email, String password) throws Exception {
-        UserBean user = this.userDAO.retrieveByEmail(email);
+    public void logIn(HttpServletRequest request, String email, String password) throws Exception{
+        UserBean user = null;
+        
+		try {
+			user = this.userDAO.retrieveByEmail(email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         // check if user is registered in the db
         if (user == null) {
@@ -71,12 +80,28 @@ public class MainModel {
         }
     }
 
-    public void logOut(HttpServletRequest request) {
+    public String logOut(HttpServletRequest request) {
+    	if (request.getSession().getAttribute("user") != null) {
+    		return "Invalid log out request";
+    	}
+    	else
+    	{
         request.getSession().setAttribute("user", null);
+        return "Successfully logged out";
+    	}
+    	
     }
 
-    public void register(String fName, String lName, String email, String password, HttpServletRequest request) throws Exception {
-        this.userDAO.register(fName, lName, email, password);
+    public void registerUser(String fName, String lName, String email, String password, HttpServletRequest request) {
+        try {
+  
+			this.userDAO.register(fName, lName, email, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+ 
     }
 
     /*
@@ -84,14 +109,17 @@ public class MainModel {
      */
 
     public void addToCart(String bid, HttpServletRequest request) {
-
-
+    	HashMap<String, Integer> cart = this.getCart(request);
+    		int quantity = 1;
+    	if (cart.containsKey(bid)) {
+    		quantity = cart.get(bid) + 1;
+    	}
+    	cart.put(bid, quantity);
     }
 
     public void removeFromCart(String bid, HttpServletRequest request) {
         HashMap<String, Integer> cart = this.getCart(request);
-
-
+        cart.remove(bid);
     }
 
     public void emptyCart(HttpServletRequest request) {
@@ -114,11 +142,27 @@ public class MainModel {
     /*
      * Book
      */
-
-    public void addReview() {
-
+    
+    public void addReview(String bid, int uid, double rating, String subject, String description)  {
+    	try {
+			this.reviewDAO.addReview(bid, uid, rating, subject, description);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
     }
 
+    public ArrayList<ReviewBean> getReview(String bid){
+    	
+    	try {
+			return this.reviewDAO.retrieveReviewsbyBookID(bid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
     /*
      * For Rest Services
      */
@@ -128,7 +172,7 @@ public class MainModel {
         String title = book.getTitle();
         double price = book.getPrice();
         String author = book.getAuthor();
-        BookType category = book.getCategory();
+        String category = book.getCategory();
         String picture = book.getPicture();
         String description = book.getDescription();
         int quantitySold = book.getQuantitySold();
@@ -155,17 +199,61 @@ public class MainModel {
     public String getOrdersByPartNumber(String bid) {
 
         // to be added
-
+    
         return null;
     }
-
+    
+    /*
+     * Address
+     */
+    
+    public AddressBean getAddress(HttpServletRequest request) {
+    	UserBean user = (UserBean) request.getSession().getAttribute("user");
+    	
+    	AddressBean address = null;
+    	try {
+			address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return address;  
+    }    
+    
+    public void addAddress(HttpServletRequest request, String street, String province, String country, String zip, String phone ) {
+    	UserBean user = (UserBean) request.getSession().getAttribute("user");
+    	try {
+			this.addressDAO.addAddress(user.getUserID(), street, province, country, zip, phone);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    /*
+     * Orders
+     */
+    
+    
+   
     /*
      * For Analytics
      */
 
-
+    public ArrayList<BookBean> getTop10() {
+    	try {
+			return this.bookDAO.top10();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
     /*
      * Payments
      */
 
+   
+    
 }

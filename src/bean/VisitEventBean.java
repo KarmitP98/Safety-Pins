@@ -3,9 +3,9 @@ package bean;
 public class VisitEventBean {
 
     private String day, bid;
-    private VisitEventType eventType;
+    private String eventType;
 
-    public VisitEventBean(String day, String bid, VisitEventType eventType) {
+    public VisitEventBean(String day, String bid, String eventType) {
         super();
         this.day = day;
         this.bid = bid;
@@ -28,11 +28,11 @@ public class VisitEventBean {
         this.bid = bid;
     }
 
-    public VisitEventType getEventType() {
+    public String getEventType() {
         return eventType;
     }
 
-    public void setEventType(VisitEventType eventType) {
+    public void setEventType(String eventType) {
         this.eventType = eventType;
     }
 

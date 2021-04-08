@@ -23,10 +23,11 @@ public class UserDAO extends DAO{
 
 	public UserBean retrieveByEmail(String userEmail) throws SQLException {
 			
-			String query = "select * from user where email =" + userEmail;
+			String query = "select * from user where email = ?";
 			UserBean user = null;
 			Connection con = this.ds.getConnection();
 			PreparedStatement p = con.prepareStatement(query);
+			p.setString(1, userEmail);
 			ResultSet r = p.executeQuery();
 			
 			while (r.next()) {

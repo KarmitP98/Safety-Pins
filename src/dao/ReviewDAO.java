@@ -21,12 +21,14 @@ public class ReviewDAO extends DAO{
 		// TODO Auto-generated constructor stub
 	}
 	public ReviewBean retrieveReview(int uid, String bid) throws SQLException {
-		String query = "select * from review where uId=" + uid + "and bId=" + bid;
+		String query = "select * from review where uid= ? and bid= ?";
 		
 		ReviewBean review = null;
 		
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setInt(1, uid);
+		p.setString(2, bid);
 		ResultSet r = p.executeQuery();
 		
 		while (r.next()) {
@@ -46,11 +48,12 @@ public class ReviewDAO extends DAO{
 		
 	}
 	public ArrayList<ReviewBean> retrieveReviewsbyBookID(String bid) throws SQLException {
-		String query = "select * from Review where bid = " + bid;
+		String query = "select * from Review where bid = ?";
 		ArrayList<ReviewBean> reviews = new ArrayList<ReviewBean>();
 		
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setString(1, bid);
 		ResultSet r = p.executeQuery();
 		
 		while(r.next()) {

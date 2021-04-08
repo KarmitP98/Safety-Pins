@@ -2,7 +2,7 @@ package dao;
 
 import bean.POBean;
 import bean.POItemBean;
-import bean.POStatus;
+
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,18 +24,19 @@ public class PODAO extends DAO{
 
 	public POBean retrievePOByID(int pid) throws SQLException {
 		
-		String query = "select * from PO where id =" + pid;
+		String query = "select * from PO where id = ?" ;
 		POBean po = null; 
 		
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setInt(1, pid);
 		ResultSet r = p.executeQuery();
 
 		
 		while (r.next()) {
 			int id = r.getInt("id");
 			String userID = r.getString("uId");
-			POStatus status = POStatus.valueOf(r.getString("status"));
+			String status = r.getString("status");
 			int addressID = r.getInt("address");
 			
 			
@@ -50,7 +51,7 @@ public class PODAO extends DAO{
 		
 	}
 	
-	public int addPO( int uid, POStatus status, int addressId) throws SQLException {
+	public int addPO( int uid, String status, int addressId) throws SQLException {
 		String query = "insert into PO values(null,?,?,?)";
 		
 		Connection con = this.ds.getConnection();
@@ -65,15 +66,38 @@ public class PODAO extends DAO{
 	
 	public ArrayList<POItemBean> retrievePOItemsById(int id) throws SQLException {
 		
-		String query = "select * from POItem where id=" + id;
+		String query = "select * from POItem where id= ?";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
+		p.setInt(1, id);
 		ResultSet r = p.executeQuery();
 		
 		ArrayList<POItemBean> items = new ArrayList<POItemBean>();
 		
 		while(r.next()) {
 			String bid = r.getString("bid");
+			int price = r.getInt("price");
+			int quantity = r.getInt("quantity");
+			
+			
+			items.add(new POItemBean(id, bid, price, quantity));
+		}
+		return items;
+		
+	}
+	
+public ArrayList<POItemBean> retrievePOItemsByBookId(String bid) throws SQLException {
+		
+		String query = "select * from POItem where bid= ?";
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con.prepareStatement(query);
+		p.setString(1, bid);
+		ResultSet r = p.executeQuery();
+		
+		ArrayList<POItemBean> items = new ArrayList<POItemBean>();
+		
+		while(r.next()) {
+			int id = r.getInt("id");
 			int price = r.getInt("price");
 			int quantity = r.getInt("quantity");
 			
