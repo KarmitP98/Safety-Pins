@@ -1,0 +1,70 @@
+.body {
+  display: flex;
+
+  width: 100vw;
+  height: 100vh;
+
+  justify-content: center;
+  align-items: center;
+
+  background: url("/assets/book-background.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.login-card {
+  display: flex;
+
+  width: fit-content;
+  height: fit-content;
+  max-height: 80%;
+
+  flex-flow: column;
+
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  background: white;
+
+  padding: 2em;
+
+  border-radius: 10px;
+
+  box-shadow: var(--0-4-16-black);
+
+}
+
+.login-header {
+  margin-bottom: 2em;
+}
+
+.login-title {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.login-body {
+  width: 30vw;
+}
+
+form {
+  width: 100%;
+}
+
+fieldset {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  width: 100%;
+
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, .5);
+}
+
+label {
+  padding-bottom: 0.25em;
+}
+
+button {
+  border-radius: 10px;
+  width: 100%;
+}
