@@ -12,14 +12,14 @@ import dao.BookDAO;
 import model.MainModel;
 
 import java.io.IOException;
-
+import java.io.Writer;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * Servlet implementation class Home
  */
-@WebServlet("/Home")
+@WebServlet("/Home/*")
 public class Home extends HttpServlet {
    
     private static final long serialVersionUID = 1L;
@@ -44,37 +44,43 @@ public class Home extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-        
+    	
+          
         if (request.getParameter("signUp") != null) {
-            //getParameters(userInfo)
-            //model.register()
-        	String fName = request.getParameter("fName");
-        	String lName = request.getParameter("lName");
-        	String email = request.getParameter("email");
-        	String password = request.getParameter("password");
+          
+        	request.getRequestDispatcher("/Register.jspx").forward(request, response);
+        }
+        else if (request.getParameter("search")!= null) {
+        	String query = request.getParameter("query");
+        	ArrayList<BookBean> list = model.searchBooks(query);
         	
-        	model.registerUser(fName, lName, email, password, request);
+        	Writer writer = response.getWriter();
+        	
+        	writer.append(list.get(0).getAuthor());
         }
 
-        if (request.getParameter("signIn") != null) {
-        	
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            
-            try {
-				model.logIn(request, email, password);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
+        else if (request.getParameter("logIn") != null) {     	
+
+        	request.getRequestDispatcher("/LogIn.jspx").forward(request, response);
             
         }
-        if (request.getParameter("logOut") != null) {
+       
+        else if (request.getParameter("logOut") != null) {
             //
             //model.signOut
         	message = model.logOut(request);
+        }
+       
+        else if (request.getParameter("browse") != null) {
+        	request.getRequestDispatcher("/Catalogue.jspx").forward(request, response);
+        }
+       
+        else if (request.getParameter("cart") != null) {
+        	request.getRequestDispatcher("/Cart.jspx").forward(request, response);
+        }
+        else
+        {
+        	request.getRequestDispatcher("/Home.jspx").forward(request, response);
         }
     }
 

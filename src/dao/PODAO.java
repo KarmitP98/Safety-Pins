@@ -38,9 +38,10 @@ public class PODAO extends DAO{
 			String userID = r.getString("uId");
 			String status = r.getString("status");
 			int addressID = r.getInt("address");
+			String date = r.getString("purchasedate");
 			
 			
-			po = new POBean(id, userID, status, addressID);
+			po = new POBean(id, userID, status, addressID, date);
 		}
 		r.close();
 		p.close();
@@ -51,18 +52,26 @@ public class PODAO extends DAO{
 		
 	}
 	
-	public int addPO( int uid, String status, int addressId) throws SQLException {
-		String query = "insert into PO values(null,?,?,?)";
+	public int addPO( int uid, String status, int addressId, String date) throws SQLException {
+		String query = "insert into PO values(null,?,?,?,?)";
 		
 		Connection con = this.ds.getConnection();
 		PreparedStatement stmt = con.prepareStatement(query);
 		stmt.setInt(1, uid);
 		stmt.setString(2, status.toString());
 		stmt.setInt(3, addressId);
+		stmt.setString(4, date);
 		
 		return stmt.executeUpdate();
 	}
-	
+	public int updatePOStatus(int id, String status) throws SQLException {
+		String query = "update PO set status = ? where id = ?";
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con.prepareStatement(query);
+		p.setString(1, status);
+		p.setInt(2, id);
+		return p.executeUpdate();
+	}
 	
 	public ArrayList<POItemBean> retrievePOItemsById(int id) throws SQLException {
 		
@@ -78,6 +87,7 @@ public class PODAO extends DAO{
 			String bid = r.getString("bid");
 			int price = r.getInt("price");
 			int quantity = r.getInt("quantity");
+		
 			
 			
 			items.add(new POItemBean(id, bid, price, quantity));
@@ -123,4 +133,27 @@ public ArrayList<POItemBean> retrievePOItemsByBookId(String bid) throws SQLExcep
 		
 	}
 
+	public String getListOfPOItems(String bid) throws SQLException {
+		String query = "SELECT * FROM  POItem  INNER JOIN PO ON PO.id = POItem.id where bid = 'b001'";
+		
+		Connection con = this.ds.getConnection();
+		PreparedStatement stmt = con.prepareStatement(query);
+		
+		ResultSet r = stmt.executeQuery();
+		String result = "";
+		while(r.next()) {
+			int id = r.getInt("id");
+			String bookId = r.getString("bid");
+			
+			result +=id + bookId;
+			
+			// create poitembean 
+			// addressbean 
+			// 
+			//create OrderWrapper 
+			
+		}
+		
+		return result;
+	}
 }

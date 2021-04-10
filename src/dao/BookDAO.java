@@ -55,7 +55,7 @@ public class BookDAO extends DAO {
 		return bb;
 	}
 	
-	public List<BookBean> retrieveAllBooks() throws SQLException {
+	public ArrayList<BookBean> retrieveAllBooks() throws SQLException {
 		String query = "select * from Book";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
@@ -89,7 +89,7 @@ public class BookDAO extends DAO {
 		
 	}
 	
-	public List<BookBean> retrieveBooksByCategory(String string) throws SQLException {
+	public ArrayList<BookBean> retrieveBooksByCategory(String string) throws SQLException {
 		String query = "select * from Book where category like '%" + string +"%'";
 		Connection con = this.ds.getConnection();
 		PreparedStatement p = con.prepareStatement(query);
@@ -141,15 +141,10 @@ public class BookDAO extends DAO {
 			
 			String picture = r.getString("picture");
 			String description = r.getString("description");
-			int quantitySold = r.getInt("sold");
-			
-			
-			books.add(new BookBean(bid, title, price, author, category, picture, description, quantitySold));
-			
-		}
-		
+			int quantitySold = r.getInt("sold");			
+			books.add(new BookBean(bid, title, price, author, category, picture, description, quantitySold));		
+		}	
 		return books;
-		
 	}
 	
 	public void updateQuantitySold(String bid, int quantitySold) throws SQLException {

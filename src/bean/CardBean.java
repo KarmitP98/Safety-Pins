@@ -8,6 +8,7 @@ public class CardBean {
 	private String cardNumber, cvc;
 	private Date expiryDate;
 	
+	
 	public CardBean(int id, int uid, String cardNumber, String cvc, Date expiryDate) {
 		super();
 		this.id = id;
@@ -15,6 +16,7 @@ public class CardBean {
 		this.cardNumber = cardNumber;
 		this.cvc = cvc;
 		this.expiryDate = expiryDate;
+		
 	}
 
 	public int getId() {

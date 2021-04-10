@@ -5,9 +5,14 @@ package dao;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import bean.VisitEventBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VisitEventDAO extends DAO {
 
@@ -33,11 +38,28 @@ public class VisitEventDAO extends DAO {
         stmt.setString(3, type.toString());
 
         stmt.executeUpdate();
+        
 
     }
+    public ArrayList<VisitEventBean> retrieveAllVisitEvents() throws SQLException {
+    	
+    	String query = "select * from VisitEvent";
+    	 Connection con = this.ds.getConnection();
+         PreparedStatement p = con.prepareStatement(query);
+         ResultSet r = p.executeQuery();
+         ArrayList<VisitEventBean> list = null;
+         while(r.next() ) {
+        	 String day = r.getString("day");
+        	 String bid = r.getString("bid");
+        	 String type = r.getString("type");
+        	 
+        	 list.add(new VisitEventBean(day, bid, type));
+         }
+         
+         return list;
+         
+    }
 
-    // to be added
-    // get listofVisitEvents by
     
 
 }

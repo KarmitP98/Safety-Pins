@@ -5,13 +5,15 @@ public class POBean {
     private String userID;
     private String status;
     private int addressID;
+    private String date;
 
-    public POBean(int id, String userID, String status, int addressID) {
+    public POBean(int id, String userID, String status, int addressID, String date) {
         super();
         this.id = id;
         this.userID = userID;
         this.status = status;
         this.addressID = addressID;
+        this.date = date;
     }
 
     public int getId() {
@@ -45,6 +47,12 @@ public class POBean {
     public void setAddressID(int addressID) {
         this.addressID = addressID;
     }
+    public void setDate (String date) {
+    	this.date = date;
 
+    }
+    public String getDate() {
+    	return this.date;
+    }
 
 }

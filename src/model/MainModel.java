@@ -14,6 +14,8 @@ import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class MainModel {
 
@@ -54,7 +56,7 @@ public class MainModel {
         }
         return instance;
     }
-
+    	
     /*
      * User
      */
@@ -104,6 +106,7 @@ public class MainModel {
  
     }
 
+
     /*
      * Cart
      */
@@ -137,11 +140,67 @@ public class MainModel {
         return cart;
 
     }
-
+    
+    public double getTotalPrice (HttpServletRequest request) {
+    	HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart");
+    	
+    	double total = 0;
+    	
+    	Iterator iterator = cart.entrySet().iterator();
+    	
+    	while (iterator.hasNext()) {
+    		 Map.Entry mapElement = (Map.Entry)iterator.next();
+    		 double bookPrice = this.getBookById(mapElement.getKey().toString()).getPrice();
+    		 int quantity = (int)mapElement.getValue();
+    		 total += bookPrice * quantity;
+    	}
+    	return total;
+    }
 
     /*
      * Book
      */
+    public ArrayList<BookBean> getBooksByCategory(String category) {
+    	
+    	try {
+			return this.bookDAO.retrieveBooksByCategory(category);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    public ArrayList<BookBean> getAllBooks() {
+    	try {
+			return this.bookDAO.retrieveAllBooks();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    public BookBean getBookById(String bid) {
+    	try {
+			return this.bookDAO.retrieveBookByID(bid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    // search books by author name or title //
+    public ArrayList<BookBean> searchBooks(String query) {
+    	try {
+			return this.bookDAO.searchBooksByTitleOrAuthor(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
     
     public void addReview(String bid, int uid, double rating, String subject, String description)  {
     	try {
@@ -169,6 +228,9 @@ public class MainModel {
     // getProductInfo(bid)
     public String getProductInfo(String bid) throws SQLException, JAXBException, IOException {
         BookBean book = this.bookDAO.retrieveBookByID(bid);
+        if (book == null) {
+        	return null;	
+        }
         String title = book.getTitle();
         double price = book.getPrice();
         String author = book.getAuthor();
@@ -199,7 +261,14 @@ public class MainModel {
     public String getOrdersByPartNumber(String bid) {
 
         // to be added
+    	
     
+        try {
+			return this.poDAO.getListOfPOItems(bid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return null;
     }
     

@@ -26,7 +26,7 @@ public class AddressDAO extends DAO{
 
 	public AddressBean retrieveAddressByUserId(int uid) throws SQLException {
 		
-	String query = "select * from Address where uid=?";
+	String query = "select * from Address where uid= ?";
 		
 		AddressBean address = null;
 		
