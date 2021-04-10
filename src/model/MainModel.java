@@ -135,11 +135,11 @@ public class MainModel {
 
 		double total = 0;
 
-		Iterator iterator = cart.entrySet().iterator();
+		Iterator<?> iterator = cart.entrySet().iterator();
 
 		while (iterator.hasNext()) {
 			Map.Entry mapElement = (Map.Entry) iterator.next();
-			double bookPrice = this.getPrice();
+			double bookPrice = ((BookBean) mapElement).getPrice();
 			int quantity = (int) mapElement.getValue();
 			total += bookPrice * quantity;
 		}

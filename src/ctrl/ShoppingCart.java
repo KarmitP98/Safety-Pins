@@ -1,31 +1,40 @@
 package ctrl;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.BookBean;
 import model.MainModel;
 
 /**
- * Servlet implementation class SignUp
+ * Servlet implementation class ShoppingCart
  */
-@WebServlet("/SignUp/*")
-public class SignUp extends HttpServlet {
+@WebServlet("/cart")
+public class ShoppingCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MainModel model;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SignUp() {
+	public ShoppingCart() {
 		super();
 		// TODO Auto-generated constructor stub
+		System.out.println("Cart");
 	}
 
-	public void init() {
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
 		model = MainModel.getInstance();
 	}
 
@@ -36,7 +45,8 @@ public class SignUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/Register.jspx").forward(request, response);
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -46,18 +56,13 @@ public class SignUp extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		doGet(request, response);
+		HashMap<BookBean,Integer> cart = model.getCart(request);
 
-		String fName = request.getParameter("fName");
-		String lName = request.getParameter("lName");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		System.out.println(cart.toString());
+		System.out.println("Error");
 
-		if (fName.length() > 0 && lName.length() > 0 && email.length() > 0 && password.length() > 0) {
-			int registered = model.registerUser(fName, lName, email, password, request);
-			
-			System.out.println(registered);
-		}
-	
+		response.getWriter();
 	}
 
 }
