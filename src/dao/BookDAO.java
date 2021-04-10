@@ -85,8 +85,6 @@ public class BookDAO extends DAO {
 		con.close();
 		
 		return list;
-		
-		
 	}
 	
 	public ArrayList<BookBean> retrieveBooksByCategory(String string) throws SQLException {
@@ -121,6 +119,30 @@ public class BookDAO extends DAO {
 		return list;
 	}
 	
+	public ArrayList<BookBean> fetchBookbyNameandCategory(String name, String category) throws SQLException {
+		
+		String query = "select * from Book where title like '%" + name + "%' and category like '%" + category +"%'";
+		Connection con = this.ds.getConnection();
+		PreparedStatement p = con.prepareStatement(query);
+		ResultSet r = p.executeQuery();
+		ArrayList<BookBean> books = new ArrayList<BookBean>();
+		
+		while(r.next()) {
+			
+			String bid = r.getString("bid");
+			String title = r.getString("title");
+			double price = r.getDouble("price");
+			String author = r.getString("author");
+			
+			String cat = r.getString("category");
+			
+			String picture = r.getString("picture");
+			String description = r.getString("description");
+			int quantitySold = r.getInt("sold");			
+			books.add(new BookBean(bid, title, price, author, cat, picture, description, quantitySold));		
+		}	
+		return books;
+	}
 	
 	public ArrayList<BookBean> searchBooksByTitleOrAuthor(String keyword) throws SQLException {
 		

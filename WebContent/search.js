@@ -7,7 +7,7 @@ window.onload = function() {
         if (e.code == "Enter") {
             searchByName();
         }
-    }
+    };
 };
 
 function searchByName() {
@@ -40,10 +40,10 @@ function search() {
                 var catalogue = document.getElementById("catalogue");
                 
                 console.log(catalogue);
-                
                 catalogue.innerHTML = result;
             }
         });
         
         nameField.value = "";
 }
+

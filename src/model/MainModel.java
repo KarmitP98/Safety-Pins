@@ -107,6 +107,7 @@ public class MainModel {
 			quantity = cart.get(book) + 1;
 		}
 		cart.put(book, quantity);
+		
 	}
 
 	public void removeFromCart(String bid, HttpServletRequest request) {
