@@ -100,37 +100,38 @@ public class MainModel {
 	 */
 
 	public void addToCart(String bid, HttpServletRequest request) {
-		HashMap<String, Integer> cart = this.getCart(request);
+		BookBean book = this.getBookById(bid);
+		HashMap<BookBean, Integer> cart = this.getCart(request);
 		int quantity = 1;
-		if (cart.containsKey(bid)) {
-			quantity = cart.get(bid) + 1;
+		if (cart.containsKey(book)) {
+			quantity = cart.get(book) + 1;
 		}
-		cart.put(bid, quantity);
+		cart.put(book, quantity);
 	}
 
 	public void removeFromCart(String bid, HttpServletRequest request) {
-		HashMap<String, Integer> cart = this.getCart(request);
-		cart.remove(bid);
+		HashMap<BookBean, Integer> cart = this.getCart(request);
+		cart.remove(this.getBookById(bid));
 	}
 
 	public void emptyCart(HttpServletRequest request) {
-		request.getSession().setAttribute("cart", new HashMap<String, Integer>());
+		request.getSession().setAttribute("cart", new HashMap<BookBean, Integer>());
 	}
 
-	public HashMap<String, Integer> getCart(HttpServletRequest request) {
-		HashMap<String, Integer> cart = null;
+	public HashMap<BookBean, Integer> getCart(HttpServletRequest request) {
+		HashMap<BookBean, Integer> cart = null;
 
 		if (request.getSession().getAttribute("cart") == null) {
-			cart = new HashMap<String, Integer>();
+			cart = new HashMap<BookBean, Integer>();
 		} else {
-			cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart");
+			cart = (HashMap<BookBean, Integer>) request.getSession().getAttribute("cart");
 		}
 		return cart;
 
 	}
 
 	public double getTotalPrice(HttpServletRequest request) {
-		HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart");
+		HashMap<BookBean, Integer> cart = (HashMap<BookBean, Integer>) request.getSession().getAttribute("cart");
 
 		double total = 0;
 
@@ -138,13 +139,13 @@ public class MainModel {
 
 		while (iterator.hasNext()) {
 			Map.Entry mapElement = (Map.Entry) iterator.next();
-			double bookPrice = this.getBookById(mapElement.getKey().toString()).getPrice();
+			double bookPrice = this.getPrice();
 			int quantity = (int) mapElement.getValue();
 			total += bookPrice * quantity;
 		}
 		return total;
 	}
-
+	
 	/*
 	 * Book
 	 */
