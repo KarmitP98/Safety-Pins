@@ -48,8 +48,9 @@ public class SignUp extends HttpServlet {
     	String password = request.getParameter("password");
        	model.registerUser(fName, lName, email, password, request);
     	
-//    	request.getRequestDispatcher("Home.jspx").forward(request, response);
-       	response.sendRedirect("../Home");
+    	request.getRequestDispatcher("Home.jspx").forward(request, response);
+       	
+      
 	}
 
 }

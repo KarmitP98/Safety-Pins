@@ -176,7 +176,8 @@ public class MainModel {
     
     public ArrayList<BookBean> getAllBooks() {
     	try {
-			return this.bookDAO.retrieveAllBooks();
+			
+    		return this.bookDAO.retrieveAllBooks();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -16,7 +16,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core" >
 	<fieldset>
 		<legend>Main Page</legend>
 		
-		<form action="Home" method="GET">	
+		<form action="" method="POST">	
 			<input type="text" name="query"></input>
 			<button type="submit" value="true" name="search" id="search">Search</button>
 

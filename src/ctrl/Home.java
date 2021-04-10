@@ -45,11 +45,12 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
     	
-          
+       
         if (request.getParameter("signUp") != null) {
           
-       	request.getRequestDispatcher("/Register.jspx").forward(request, response);
+        	request.getRequestDispatcher("/Register.jspx").forward(request, response);
         	
+      
         }
         else if (request.getParameter("search")!= null) {
         	String query = request.getParameter("query");
@@ -63,6 +64,7 @@ public class Home extends HttpServlet {
         else if (request.getParameter("logIn") != null) {     	
 
         	request.getRequestDispatcher("/LogIn.jspx").forward(request, response);
+        	
         
             
         }

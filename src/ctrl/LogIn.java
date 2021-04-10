@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.research.ws.wadl.Response;
+
 import model.MainModel;
 
 /**
@@ -56,7 +58,7 @@ public class LogIn extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}   
-		
+      request.getRequestDispatcher("/Home.jspx").forward(request, response);;
 	}
 
 }
