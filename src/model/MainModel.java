@@ -135,7 +135,7 @@ public class MainModel {
 
 		double total = 0;
 
-		Iterator<?> iterator = cart.entrySet().iterator();
+		Iterator iterator = cart.entrySet().iterator();
 
 		while (iterator.hasNext()) {
 			Map.Entry mapElement = (Map.Entry) iterator.next();
