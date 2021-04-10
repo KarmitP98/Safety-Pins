@@ -1,0 +1,87 @@
+.login-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: url("~src/assets/book-background.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.login-page .login-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 80%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  -webkit-box-shadow: var(-20-black);
+          box-shadow: var(-20-black);
+}
+
+.login-page .login-header {
+  margin-bottom: 2em;
+}
+
+.login-page .login-title {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.login-page .login-body {
+  width: 30vw;
+}
+
+.login-page form {
+  width: 100%;
+}
+
+.login-page fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.login-page label {
+  padding-bottom: 0.25em;
+}
+
+.login-page button {
+  border-radius: 10px;
+  width: 100%;
+}
+/*# sourceMappingURL=login.component.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,IAAI;EAET,IAAI,EAAE,IAAI;EACV,OAAO,EAAE,IAAI;EAEb,WAAW,EAAE,UAAU;EACvB,SAAS,EAAE,QAAQ;EAEnB,eAAe,EAAE,YAAY;EAC7B,KAAK,EAAE,IAAI;EAEX,UAAU,EAAE,IAAI;EAEhB,SAAS,EAAE,eAAe;EAE1B,UAAU,EAAE,iBAAiB;CAC9B",
+    "sources": [
+        "catalogue.scss"
+    ],
+    "names": [],
+    "file": "catalogue.css"
+}
