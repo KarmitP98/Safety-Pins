@@ -33,7 +33,7 @@ public class SignUp extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/components/signup/signup.html").forward(request, response);
+		request.getRequestDispatcher("/Register.jspx").forward(request, response);
 	}
 
 	/**
@@ -48,7 +48,8 @@ public class SignUp extends HttpServlet {
     	String password = request.getParameter("password");
        	model.registerUser(fName, lName, email, password, request);
     	
-    	request.getRequestDispatcher("Home.jspx").forward(request, response);
+//    	request.getRequestDispatcher("Home.jspx").forward(request, response);
+       	response.sendRedirect("../Home");
 	}
 
 }

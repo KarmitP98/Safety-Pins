@@ -71,7 +71,7 @@ public class MainModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println(user.getEmail());
         // check if user is registered in the db
         if (user == null) {
             throw new Exception("Invalid user email!");
@@ -105,8 +105,11 @@ public class MainModel {
 		}
  
     }
-
-
+    // Testing purpose
+    public void test() throws SQLException {
+    	this.userDAO.readAndPrintTableToConsole();
+    }
+    
     /*
      * Cart
      */

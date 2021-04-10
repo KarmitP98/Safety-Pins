@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class UserDAO extends DAO{
@@ -23,7 +24,7 @@ public class UserDAO extends DAO{
 
 	public UserBean retrieveByEmail(String userEmail) throws SQLException {
 			
-			String query = "select * from user where email = ?";
+			String query = "select * from user where email = ?" ;
 			UserBean user = null;
 			Connection con = this.ds.getConnection();
 			PreparedStatement p = con.prepareStatement(query);
@@ -32,12 +33,14 @@ public class UserDAO extends DAO{
 			
 			while (r.next()) {
 				int userID = r.getInt("id");
+				
 				String fName = r.getString("fName");
 				String lName = r.getString("lName");
 				String email = r.getString("email");
 				String password = r.getString("password");
+				String type = r.getString("userType");
 				
-				user = new UserBean(userID, fName, lName, email, password);
+				user = new UserBean(userID, fName, lName, email, password, type);
 			}
 			r.close();
 			p.close();
@@ -54,15 +57,35 @@ public class UserDAO extends DAO{
 			throw new Exception("The user with the email exists!");
 		}
 		
-		String preparedStatement = "insert into user values(null,?,?,?,?)";
+		String preparedStatement = "INSERT INTO User (fName, lName, email, password) VALUES (?,?,?,?)";
 		Connection con = this.ds.getConnection();
 		PreparedStatement stmt = con.prepareStatement(preparedStatement);
 		stmt.setString(1,fName);
 		stmt.setString(2, lName);
 		stmt.setString(3, email);
 		stmt.setString(4, password);
+	
 		return stmt.executeUpdate();
 		
 	}
+
+	public void readAndPrintTableToConsole() throws SQLException {
+
+        try {
+            DataSource ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
+            Connection con = ds.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
+            while(rs.next()){
+                 String em= rs.getString("ID");
+                String fname = rs.getString("FName");
+                String userType = rs.getString("userType");
+                System.out.println("\t" + em+ ",\t" + fname+ "\t " + "\t " + userType);
+                }//end while loop
+             con.close();
+             } catch (NamingException e) {
+                 e.printStackTrace();
+             }
+        }
 
 }

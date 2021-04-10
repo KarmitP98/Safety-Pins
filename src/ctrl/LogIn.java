@@ -51,8 +51,6 @@ public class LogIn extends HttpServlet {
     	  	
 			MainModel.getInstance().logIn(request, email, password);
 			
-			Writer writer = response.getWriter();
-			writer.append(request.getSession().getAttribute("user").toString());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -48,7 +48,8 @@ public class Home extends HttpServlet {
           
         if (request.getParameter("signUp") != null) {
           
-        	request.getRequestDispatcher("/Register.jspx").forward(request, response);
+       	request.getRequestDispatcher("/Register.jspx").forward(request, response);
+        	
         }
         else if (request.getParameter("search")!= null) {
         	String query = request.getParameter("query");
@@ -62,6 +63,7 @@ public class Home extends HttpServlet {
         else if (request.getParameter("logIn") != null) {     	
 
         	request.getRequestDispatcher("/LogIn.jspx").forward(request, response);
+        
             
         }
        
@@ -79,8 +81,14 @@ public class Home extends HttpServlet {
         	request.getRequestDispatcher("/Cart.jspx").forward(request, response);
         }
         else
-        {
+        {   try {
+			model.test();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 	
         	request.getRequestDispatcher("/Home.jspx").forward(request, response);
+        	
         }
     }
 
