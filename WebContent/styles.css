@@ -96,6 +96,11 @@ fieldset span {
           box-shadow: var(--z-4-16-black);
 }
 
+.button-link {
+	color: white;
+	text-decoration: none;
+}
+
 .button-primary {
   color: white;
   background: var(--primary);
@@ -417,9 +422,9 @@ fieldset span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column;
@@ -432,6 +437,16 @@ fieldset span {
   padding: 5vh 0;
   background: var(--background);
   z-index: 0;
+}
+
+.category select{
+	border: none;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+}
+
+a{
+	text-decoration: none;
 }
 
 .category .title {
@@ -612,7 +627,7 @@ nav .options-area span.material-icons > .badge {
           box-shadow: var(--z-4-16-black);
 }
 
-nav #logo {
+nav #logo, nav a {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;

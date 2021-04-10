@@ -80,13 +80,14 @@ public class MainModel {
 
 	}
 
-	public void registerUser(String fName, String lName, String email, String password, HttpServletRequest request) {
+	public int registerUser(String fName, String lName, String email, String password, HttpServletRequest request) {
 		try {
-			this.userDAO.register(fName, lName, email, password);
+			return this.userDAO.register(fName, lName, email, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 	// Testing purpose

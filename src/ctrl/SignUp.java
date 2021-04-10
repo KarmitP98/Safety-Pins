@@ -53,10 +53,11 @@ public class SignUp extends HttpServlet {
 		String password = request.getParameter("password");
 
 		if (fName.length() > 0 && lName.length() > 0 && email.length() > 0 && password.length() > 0) {
-			model.registerUser(fName, lName, email, password, request);
+			int registered = model.registerUser(fName, lName, email, password, request);
+			
+			System.out.println(registered);
 		}
 		
-		response.sendRedirect("home.html");
 	}
 
 }

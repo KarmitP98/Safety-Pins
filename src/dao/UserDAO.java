@@ -50,17 +50,20 @@ public class UserDAO extends DAO {
 		if (this.retrieveByEmail(email) != null) {
 			throw new Exception("The user with the email exists!");
 		}
+		
+		System.out.println("Email is trying to register!");
 
-		String preparedStatement = "INSERT INTO User (fName, lName, email, password) VALUES (?,?,?,?)";
-		Connection con = this.ds.getConnection();
-		PreparedStatement stmt = con.prepareStatement(preparedStatement);
-		stmt.setString(1, fName);
-		stmt.setString(2, lName);
-		stmt.setString(3, email);
-		stmt.setString(4, password);
+//		String preparedStatement = "INSERT INTO User (fName, lName, email, password) VALUES (?,?,?,?)";
+//		Connection con = this.ds.getConnection();
+//		PreparedStatement stmt = con.prepareStatement(preparedStatement);
+//		stmt.setString(1, fName);
+//		stmt.setString(2, lName);
+//		stmt.setString(3, email);
+//		stmt.setString(4, password);
 
-		return stmt.executeUpdate();
-
+//		return stmt.executeUpdate();
+		
+		return 1;
 	}
 
 	public void readAndPrintTableToConsole() throws SQLException {
