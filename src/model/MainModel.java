@@ -96,7 +96,7 @@ public class MainModel {
             int registered = this.userDAO.register(fName, lName, email, password);
             if (registered == 1) {
                 System.out.println("A new user has been registered!");
-                response.sendRedirect("/home.jsp");
+                response.sendRedirect("/add-info.jsp");
             } else
                 response.sendRedirect("/signup.html");
         } catch (Exception e) {
