@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="styles.css" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet" />
-<script type="text/javascript" src="search.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<title>Dashboard</title>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"/>
+    <script src="search.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <title>Dashboard</title>
 </head>
 <body>
-	<nav>
-		<div class="navbar">
-			<a id="logo" href="home.html"> <img alt="Red Logo"
-				src="assets/logo-red-bg.png" />
-			</a>
-			<fieldset>
-				<input id="book" placeholder="Explore our catalogue..." type="text" />
-				<span class="material-icons" onclick="searchByName()">search</span>
-			</fieldset>
-			<div class="options-area">
-				<a href="shoppingcart.html">
-					<div class="cart-btn">
+<nav>
+    <div class="navbar">
+        <a href="home.html" id="logo"> <img alt="Red Logo"
+                                            src="assets/logo-red-bg.png"/>
+        </a>
+        <fieldset>
+            <input id="book" placeholder="Explore our catalogue..." type="text"/>
+            <span class="material-icons" onclick="searchByName()">search</span>
+        </fieldset>
+        <div class="options-area">
+            <a href="shoppingcart.html">
+                <div class="cart-btn">
 						<span class="material-icons">shopping_cart <span
-							class="badge">2</span>
+                                class="badge">2</span>
 						</span>
-					</div>
-				</a> <span class="center-line"></span>
-				<div class="logout-btn">
-					<span class="material-icons">logout</span>
-				</div>
-			</div>
-		</div>
-	</nav>
-	<div class="main-content-area">
-		<div class="category">
-			<div class="title">Category</div>
-			<form style="width:50%;" method="POST">
-				 <select name="category"
-					id="category" >
-					<option value="all">All</option>
-					<option value="fiction">Fiction</option>
-					<option value="science">Science</option>
-					<option value="engineering">Engineering</option>
-                    <option value="maths">Maths</option>
-                    <option value="modern">Modern</option>
-                    <option value="kids">Kids</option>
-				</select> <br>
-				<br> 
-				<button class='button button-primary' type="button"  onclick="searchByCategory()">Filter</button>
-			</form>
-		</div>
-	</div>
-	<div class="catalogue" id="catalogue">
-		
-	</div>
+                </div>
+            </a> <span class="center-line"></span>
+            <div class="logout-btn">
+                <span class="material-icons">logout</span>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="main-content-area">
+    <div class="category">
+        <div class="title">Category</div>
+        <form method="POST" style="width:50%;">
+            <select id="category"
+                    name="category">
+                <option value="all">All</option>
+                <option value="fiction">Fiction</option>
+                <option value="science">Science</option>
+                <option value="engineering">Engineering</option>
+                <option value="maths">Maths</option>
+                <option value="modern">Modern</option>
+                <option value="kids">Kids</option>
+            </select> <br>
+            <br>
+            <button class='button button-primary' onclick="searchByCategory()" type="button">Filter</button>
+        </form>
+    </div>
+</div>
+<div class="catalogue" id="catalogue">
+
+</div>
 </body>
 </html>

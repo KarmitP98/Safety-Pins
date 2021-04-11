@@ -1,9 +1,9 @@
 package bean;
 
+import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
 
 @XmlRootElement(name = "bookReport")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,8 +30,9 @@ public class BookWrapper {
     private int quantitySold;
 
     public BookWrapper() {
-    	
+
     }
+
     public BookWrapper(String bid, String title, double price, String author,
                        String category, String picture, String description, int quantitySold) {
         super();

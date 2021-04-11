@@ -47,12 +47,14 @@ public class POBean {
     public void setAddressID(int addressID) {
         this.addressID = addressID;
     }
-    public void setDate (String date) {
-    	this.date = date;
 
-    }
     public String getDate() {
-    	return this.date;
+        return this.date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+
     }
 
 }

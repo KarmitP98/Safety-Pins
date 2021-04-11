@@ -13,7 +13,7 @@
         <init-param>
             <!-- For Jersey 1.x -->
             <!-- <param-name>com.sun.jersey.config.property.packages</param-name> -->
-            <!-- For Jersey 2.x -->	
+            <!-- For Jersey 2.x -->
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>rest</param-value>
         </init-param>

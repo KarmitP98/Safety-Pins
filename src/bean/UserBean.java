@@ -54,14 +54,13 @@ public class UserBean {
         this.password = password;
     }
 
-	public String getUserType() {
-		return userType;
-	}
+    public String getUserType() {
+        return userType;
+    }
 
-	public void setType(String type) {
-		this.userType = userType;
-	}
-    
+    public void setType(String type) {
+        this.userType = userType;
+    }
 
 
 }

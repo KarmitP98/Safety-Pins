@@ -14,6 +14,7 @@
           <element id="module-output" name="SafetyPins" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-server:2.27" />
           <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-common:2.27" />
           <element id="library" level="project" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
