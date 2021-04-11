@@ -314,13 +314,15 @@ public class MainModel {
      */
 
 
-    public void addPO(int uid, String status, int addressId, String date) {
-        try {
-            this.poDAO.addPO(uid, status, addressId, date);
+    public int addPO(int uid, String status, int addressId, String date) {
+    	int pid = 0;
+    	try {
+           pid = this.poDAO.addPO(uid, status, addressId, date);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    	return pid;
     }
 
     public POBean getPObyId(int id) {
@@ -353,7 +355,7 @@ public class MainModel {
         return null;
     }
 
-    public void addPOItem(int id, String bid, int price, int quantity) {
+    public void addPOItem(int id, String bid, double price, int quantity) {
         try {
             this.poDAO.addPOItem(id, bid, price, quantity);
         } catch (SQLException e) {
@@ -362,6 +364,22 @@ public class MainModel {
         }
     }
 
+    public void addPOandItems(HttpServletRequest request, String status, String date) throws SQLException {
+    	UserBean user = (UserBean) request.getSession().getAttribute("user");
+    	HashMap<BookBean, Integer> cart = (HashMap) request.getSession().getAttribute("cart");
+    	AddressBean address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
+    	
+    	//adds a new purchase order
+    	int pid = addPO(user.getUserID(), status, address.getId(), date);
+    	
+    	//adds POItems for each item in the cart
+    	 for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
+             
+    		 this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
+         }
+
+    	
+    };
     /*
      * Visit Events
      */

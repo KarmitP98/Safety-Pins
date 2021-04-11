@@ -4,9 +4,10 @@ public class POItemBean {
 
     private int id;
     private String bid;
-    private int price, quantity;
+    private double price;
+    private int  quantity;
 
-    public POItemBean(int id, String bid, int price, int quantity) {
+    public POItemBean(int id, String bid, double price, int quantity) {
         super();
         this.id = id;
         this.bid = bid;
@@ -30,11 +31,11 @@ public class POItemBean {
         this.bid = bid;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

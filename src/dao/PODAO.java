@@ -46,7 +46,7 @@ public class PODAO extends DAO {
 
 
     }
-
+    // adds a new Purchase order and returns the poId
     public int addPO(int uid, String status, int addressId, String date) throws SQLException {
         String query = "insert into PO values(null,?,?,?,?)";
 
@@ -56,8 +56,15 @@ public class PODAO extends DAO {
         stmt.setString(2, status.toString());
         stmt.setInt(3, addressId);
         stmt.setString(4, date);
-
-        return stmt.executeUpdate();
+        stmt.executeUpdate();
+        
+        query = "select * from PO where id = (select max(id) from PO)";
+        stmt = con.prepareStatement(query);
+        
+        ResultSet r = stmt.executeQuery();
+        
+        return r.getInt("id");
+        
     }
 
     public int updatePOStatus(int id, String status) throws SQLException {
@@ -81,7 +88,7 @@ public class PODAO extends DAO {
 
         while (r.next()) {
             String bid = r.getString("bid");
-            int price = r.getInt("price");
+            double price = r.getDouble("price");
             int quantity = r.getInt("quantity");
 
 
@@ -103,7 +110,7 @@ public class PODAO extends DAO {
 
         while (r.next()) {
             int id = r.getInt("id");
-            int price = r.getInt("price");
+            double price = r.getDouble("price");
             int quantity = r.getInt("quantity");
 
 
@@ -113,7 +120,7 @@ public class PODAO extends DAO {
 
     }
 
-    public int addPOItem(int id, String bid, int price, int quantity) throws SQLException {
+    public int addPOItem(int id, String bid, double price, int quantity) throws SQLException {
 
         String query = "insert into POItem values(?,?,?,?)";
 
@@ -121,7 +128,7 @@ public class PODAO extends DAO {
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, id);
         stmt.setString(2, bid);
-        stmt.setInt(3, price);
+        stmt.setDouble(3, price);
         stmt.setInt(4, quantity);
 
         return stmt.executeUpdate();
