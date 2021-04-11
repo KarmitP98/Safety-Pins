@@ -29,6 +29,7 @@ public class MainModel {
     private VisitEventDAO visitEventDAO;
     private ReviewDAO reviewDAO;
     private AddressDAO addressDAO;
+    private CounterDAO	counterDAO;
     // DAOs need to be declared
 
     private MainModel() {
@@ -41,6 +42,7 @@ public class MainModel {
             this.poDAO = new PODAO();
             this.visitEventDAO = new VisitEventDAO();
             this.reviewDAO = new ReviewDAO();
+            this.counterDAO = new CounterDAO();
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -445,5 +447,26 @@ public class MainModel {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    public void incrementCounter(HttpServletRequest request) {
+    	UserBean user = (UserBean) request.getSession().getAttribute("user");
+    	try {
+			this.counterDAO.incrementCounter(user.getUserID());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+    }
+    
+    public int getCounter(HttpServletRequest request) {
+    	UserBean user = (UserBean) request.getSession().getAttribute("user");
+    	try {
+			return this.counterDAO.getCounter(user.getUserID()).getCounter();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return 0;
     }
 }
