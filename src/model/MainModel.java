@@ -11,6 +11,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -205,7 +206,7 @@ public class MainModel {
         }
     }
 
-    public ArrayList<ReviewBean> getReview(String bid) {
+    public ArrayList<ReviewBean> getReviews(String bid) {
 
         try {
             return this.reviewDAO.retrieveReviewsbyBookID(bid);
@@ -294,7 +295,77 @@ public class MainModel {
     /*
      * Orders
      */
-
+    
+    
+    public void addPO(int uid, String status, int addressId, String date) {
+    	try {
+			this.poDAO.addPO(uid, status, addressId, date);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    public POBean getPObyId(int id) {
+    	try {
+			return this.poDAO.retrievePOByID(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
+    public ArrayList<POItemBean> getPOItemsbyPOId(int id) {
+    		try {
+				return this.poDAO.retrievePOItemsById(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		return null;
+    }
+    
+    public ArrayList<POItemBean> getPOItemsbyBookId(String bid) {
+    		try {
+				return this.poDAO.retrievePOItemsByBookId(bid);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		return null;
+    }
+    
+    public void addPOItem(int id, String bid, int price, int quantity) {
+    	try {
+			this.poDAO.addPOItem(id, bid, price, quantity);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    /*
+     * Visit Events
+     */
+    
+    public ArrayList<VisitEventBean> getAllVisitEvents() {
+    	try {
+			return this.visitEventDAO.retrieveAllVisitEvents();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    public void addVisitEvent(String day, String bid, String type) {
+    	try {
+			this.visitEventDAO.addVisitEvent(day, bid, type);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /*
      * For Analytics
      */
@@ -324,5 +395,14 @@ public class MainModel {
     public CardBean getCard(HttpServletRequest request){
         UserBean userBean = (UserBean) request.getSession().getAttribute("user");
         return this.cardDAO.retrieveByUserId(userBean.getUserID());
+    }
+    
+    public void addCard(int uid, String cardNumber, String cvc, Date expiryDate) {
+    	try {
+			this.cardDAO.addCard(uid, cardNumber, cvc, expiryDate);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
