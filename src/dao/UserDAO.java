@@ -47,7 +47,7 @@ public class UserDAO extends DAO {
         return userBean;
     }
 
-    public UserBean fetchUserByID(String id) {
+    public UserBean fetchUserByID(int id) {
         return this.fetchQuery("select * from user where id = '" + id+"'");
     }
 
