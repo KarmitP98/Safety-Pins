@@ -48,12 +48,12 @@
             <select id="category"
                     name="category">
                 <option value="all">All</option>
-                <option value="fiction">Fiction</option>
-                <option value="science">Science</option>
-                <option value="engineering">Engineering</option>
-                <option value="maths">Maths</option>
-                <option value="modern">Modern</option>
-                <option value="kids">Kids</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Science">Science</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Maths">Maths</option>
+                <option value="Modern">Modern</option>
+                <option value="Kids">Kids</option>
             </select> <br>
             <br>
             <button class='button button-primary' onclick="searchByCategory()" type="button">Filter</button>

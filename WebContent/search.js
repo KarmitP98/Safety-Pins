@@ -38,12 +38,12 @@ function search() {
 
     name = nameField.value;
     cat = categoryField.value;
+
     $.ajax({
         type: "get",
         url: "book",
         data: {name: name, category: cat},
         success: function (content) {
-            console.log(content)
             document.getElementById("catalogue").innerHTML = content;
         }
     });

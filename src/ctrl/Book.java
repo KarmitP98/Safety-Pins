@@ -58,6 +58,7 @@ public class Book extends HttpServlet {
         String name = request.getParameter("name");
         String category = request.getParameter("category");
 
+
         ArrayList<BookBean> books = new ArrayList<>();
 
         if (name.equals("") && category.equals("all")) {
@@ -69,12 +70,14 @@ public class Book extends HttpServlet {
         if (name.trim().length() > 0 && !category.equals("all")) {
             books = model.fetchBookbyNameandCategory(name, category);
         }
-        if (name.trim().length() == 0 && !category.equals("all"))
+        if (name.trim().length() == 0 && !category.equals("all")) {
             books = model.getBooksByCategory(category);
+        }
 
         StringBuilder result = new StringBuilder();
 
         for (BookBean book : books) {
+            System.out.println("book = " + book.toString());
             result.append(getBookCard(book));
         }
 
