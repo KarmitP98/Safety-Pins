@@ -105,6 +105,10 @@ public class MainModel {
         }
     }
 
+    public String getUserFullNameByUid(int uid) {
+    	UserBean user = this.userDAO.fetchUserByID(uid);
+    	return user.getfName() + " " + user.getlName();
+    }
 
     // Testing purpose
     public void test() throws SQLException {
