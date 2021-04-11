@@ -4,8 +4,15 @@
 
 window.onload = function () {
 
+    console.log("Search for books")
     search();
-
+    $.ajax({
+        type: 'get',
+        url: 'user-load',
+        success: function (res) {
+            console.log(res);
+        }
+    })
     document.getElementById('book').onkeypress = function (e) {
         if (e.code === "Enter") {
             searchByName();
@@ -28,6 +35,7 @@ function search() {
     let name = "";
     let cat = "";
 
+
     name = nameField.value;
     cat = categoryField.value;
     $.ajax({
@@ -35,6 +43,7 @@ function search() {
         url: "book",
         data: {name: name, category: cat},
         success: function (content) {
+            console.log(content)
             document.getElementById("catalogue").innerHTML = content;
         }
     });

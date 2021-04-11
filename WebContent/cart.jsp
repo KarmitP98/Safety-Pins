@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="bean.UserBean" %><%--
+  Created by IntelliJ IDEA.
+  User: Karmit
+  Date: 11-Apr.-2021
+  Time: 10:24 a.m.
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="styles.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"/>
@@ -12,20 +16,21 @@
     <title>Shopping Cart</title>
 </head>
 <body>
+<% UserBean userBean = (UserBean) request.getSession().getAttribute("user");%>
 <nav>
     <div class="navbar">
-        <a href="home.html" id="logo">
+        <a href="home.jsp" id="logo">
             <img alt="Red Logo" src="assets/logo-red-bg.png"/>
         </a>
         <div class="options-area">
-            <a href="home.html">
+            <a href="home.jsp">
                 <div class="cart-btn">
                     <span class="material-icons">home </span>
                 </div>
             </a> <span class="center-line"></span>
-            <a href="/logout">
+            <a href="<%= userBean!= null ? "/logout":"login.html"%>">
                 <div class="logout-btn">
-                    <span class="material-icons">logout</span>
+                    <span class="material-icons"><%= userBean != null ? "logout" : "login"%></span>
                 </div>
             </a>
         </div>
@@ -111,9 +116,12 @@
         <div class="card-subtitle">Taxes will be calculated at checkout</div>
         <br/> <br/>
         <div class="card-body">
-            <a href="reviewOrder.html">
-                <button class="button button-primary">Proceed to checkout</button>
+            <a href='<%= userBean!= null ? "reviewOrder.jsp":"login.html"%>'>
+                <button class="button button-primary">
+                    <%= userBean != null ? "Proceed to Checkout" : "Login to Continue"%>
+                </button>
             </a>
+
         </div>
     </div>
 </div>

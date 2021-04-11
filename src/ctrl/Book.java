@@ -69,6 +69,8 @@ public class Book extends HttpServlet {
         if (name.trim().length() > 0 && !category.equals("all")) {
             books = model.fetchBookbyNameandCategory(name, category);
         }
+        if (name.trim().length() == 0 && !category.equals("all"))
+            books = model.getBooksByCategory(category);
 
         StringBuilder result = new StringBuilder();
 

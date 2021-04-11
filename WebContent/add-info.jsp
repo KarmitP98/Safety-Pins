@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: Karmit
+  Date: 11-Apr.-2021
+  Time: 11:26 a.m.
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="styles.css" rel="stylesheet"/>
     <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Add Payment Information</title>
 </head>
 <body>

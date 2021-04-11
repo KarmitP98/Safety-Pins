@@ -2,9 +2,6 @@ package dao;
 
 import bean.UserBean;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDAO extends DAO {
@@ -51,12 +48,12 @@ public class UserDAO extends DAO {
     }
 
     public UserBean fetchUserByID(String id) {
-        return this.fetchQuery("select * from user where id = " + id);
+        return this.fetchQuery("select * from user where id = '" + id+"'");
     }
 
     public UserBean fetchUserByEmail(String userEmail) {
         UserBean user = null;
-        return this.fetchQuery("select * from user where email = " + userEmail);
+        return this.fetchQuery("select * from user where email = '" + userEmail+"'");
     }
 
     /**
@@ -67,7 +64,7 @@ public class UserDAO extends DAO {
      * @return
      */
     public UserBean fetchUserbyEmailandPassword(String email, String password) {
-        return this.fetchQuery("select * from user where email = " + email + " and password = " + password);
+        return this.fetchQuery("select * from user where email = '" + email + "' and password = '" + password+"'");
     }
 
     public int register(String fName, String lName, String email, String password) throws Exception {
@@ -90,21 +87,21 @@ public class UserDAO extends DAO {
 
     public void readAndPrintTableToConsole() throws SQLException {
 
-        try {
-            DataSource ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-            Connection con = ds.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
-            while (rs.next()) {
-                String em = rs.getString("ID");
-                String fname = rs.getString("FName");
-                String userType = rs.getString("userType");
-                System.out.println("\t" + em + ",\t" + fname + "\t " + "\t " + userType);
-            } // end while loop
-            con.close();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+        //            DataSource ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
+        Connection con = ds.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
+        while (rs.next()) {
+            String em = rs.getString("ID");
+            String fname = rs.getString("FName");
+            String userType = rs.getString("userType");
+            String email = rs.getString("email");
+            System.out.println("email = " + email);
+            String password = rs.getString("password");
+            System.out.println("password = " + password);
+            System.out.println("\t" + em + ",\t" + fname + "\t " + "\t " + userType);
+        } // end while loop
+        con.close();
     }
 
 

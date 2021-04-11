@@ -78,7 +78,7 @@ public class Home extends HttpServlet {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            request.getRequestDispatcher("/Home.jspx").forward(request, response);
+            request.getRequestDispatcher("/home.jsp").forward(request, response);
 
         }
     }

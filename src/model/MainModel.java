@@ -64,17 +64,9 @@ public class MainModel {
         UserBean user = null;
         user = this.userDAO.fetchUserbyEmailandPassword(email, password);
 
-        response.sendRedirect("/home.html");
-        System.out.println("user = " + user);
-
-        System.out.println("Also Here");
-
-
         if (user != null) {
-            System.out.println("Here");
-            System.out.println(user.toString());
             request.getSession().setAttribute("user", user);
-            response.sendRedirect("/home.html");
+            response.sendRedirect("/home.jsp");
         } else {
             response.sendRedirect("/login.html");
         }
@@ -96,7 +88,7 @@ public class MainModel {
             int registered = this.userDAO.register(fName, lName, email, password);
             if (registered == 1) {
                 System.out.println("A new user has been registered!");
-                response.sendRedirect("/home.html");
+                response.sendRedirect("/home.jsp");
             } else
                 response.sendRedirect("/signup.html");
         } catch (Exception e) {

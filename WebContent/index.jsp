@@ -11,6 +11,6 @@
     <title>Index</title>
 </head>
 <body>
-<a href="home.html">Go to Home</a>
+<a href="home.jsp">Go to Home</a>
 </body>
 </html>
