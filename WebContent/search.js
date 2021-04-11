@@ -4,6 +4,13 @@
 
 window.onload = function () {
 
+    //url = event (Home, Cart, Login)
+    $.ajax({
+        type: 'get',
+        url: 'event',
+        data: {type: 'home'}
+    })
+
     console.log("Search for books")
     search();
     $.ajax({

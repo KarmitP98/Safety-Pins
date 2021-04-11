@@ -66,7 +66,15 @@ public class MainModel {
 
         if (user != null) {
             request.getSession().setAttribute("user", user);
+
+            // Check user type
+
+            // If Visitor
             response.sendRedirect("/home.jsp");
+
+            // If Admin
+            // Redirect to report-page.html
+            
         } else {
             response.sendRedirect("/login.html");
         }
