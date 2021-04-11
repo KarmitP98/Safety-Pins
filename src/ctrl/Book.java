@@ -92,9 +92,9 @@ public class Book extends HttpServlet {
                 + "				<div class=\"card-subtitle\">" + book.getAuthor() + "</div>\r\n"
                 + "				<div class=\"price\">\r\n" + "					<p>$ " + book.getPrice() + "</p>\r\n"
                 + "				</div>\r\n" + "			</div>\r\n" + "			<div class=\"card-action\">\r\n"
-                + "				<div class=\"book-rating\">\r\n" + "					<p>4.5 / 5</p>\r\n"
+                + "				<div class=\"book-rating\">\r\n"
                 + "				</div>\r\n" + "				<div class=\"card-action-list\">\r\n"
-                + "					<span class=\"material-icons\" id=\"open\">launch</span> &nbsp; <span\r\n"
+                + "					<a href='/product-detail?bid=" + book.getBid() + "'><span class=\"material-icons\" id=\"open\">launch</span></a> &nbsp; <span\r\n"
                 + "						class=\"material-icons\" id=\"bag\" onclick='addItemToCart(\"" + book.getBid() + "\")'>shopping_bag</span>\r\n"
                 + "				</div>\r\n" + "			</div>\r\n" + "		</div>";
     }

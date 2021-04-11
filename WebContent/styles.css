@@ -1107,7 +1107,7 @@ nav #logo img {
     margin-top: 3em;
 }
 
-.product-detail .review {
+.product-detail .reviews {
     font-size: 1.2em;
     font-weight: 500;
     padding: 0.5em 1em;
@@ -1116,6 +1116,17 @@ nav #logo img {
     background: var(--primary);
     -webkit-box-shadow: var(--z-4-16-red);
     box-shadow: var(--z-4-16-red);
+}
+
+.review-list {
+    display: flex;
+
+    flex-flow: column;
+
+    height: fit-content;
+    width: fit-content;
+
+    gap: 1em;
 }
 
 .review {
