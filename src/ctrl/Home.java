@@ -66,7 +66,7 @@ public class Home extends HttpServlet {
         } else if (request.getParameter("logOut") != null) {
             //
             //model.signOut
-            message = model.logOut(request);
+            model.logOut(request, response);
         } else if (request.getParameter("browse") != null) {
             request.getRequestDispatcher("/Catalogue.jspx").forward(request, response);
         } else if (request.getParameter("cart") != null) {

@@ -46,9 +46,10 @@ public class LogIn extends HttpServlet {
         String password = request.getParameter("password");
         System.out.println(email + " : " + password);
 
-        if (email.length() > 0 && password.length() > 6) {
+        if (email.length() > 0 && password.length() > 0) {
             try {
-                MainModel.getInstance().logIn(request, email, password);
+
+                MainModel.getInstance().logIn(request, response, email, password);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

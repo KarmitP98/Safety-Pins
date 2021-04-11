@@ -30,23 +30,22 @@ function search() {
 
     name = nameField.value;
     cat = categoryField.value;
-
-    console.log(cat + " : " + name);
-
     $.ajax({
         type: "get",
         url: "book",
         data: {name: name, category: cat},
         success: function (content) {
-            var result = content;
-            console.log(result);
-            var catalogue = document.getElementById("catalogue");
-
-            console.log(catalogue);
-            catalogue.innerHTML = result;
+            document.getElementById("catalogue").innerHTML = content;
         }
     });
 
     nameField.value = "";
 }
 
+function addItemToCart(bid) {
+    $.ajax({
+        type: 'get',
+        url: 'add-item',
+        data: {bid: bid}
+    })
+}

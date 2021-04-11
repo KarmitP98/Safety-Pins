@@ -4,6 +4,7 @@ import bean.*;
 import dao.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -59,37 +60,50 @@ public class MainModel {
     /**
      * Fetch user using login credentials. Setup User value in session storage.
      */
-    public void logIn(HttpServletRequest request, String email, String password) throws Exception {
+    public void logIn(HttpServletRequest request, HttpServletResponse response, String email, String password) throws Exception {
         UserBean user = null;
-
         user = this.userDAO.fetchUserbyEmailandPassword(email, password);
 
+        response.sendRedirect("/home.html");
+        System.out.println("user = " + user);
+
+        System.out.println("Also Here");
+
+
         if (user != null) {
+            System.out.println("Here");
             System.out.println(user.toString());
             request.getSession().setAttribute("user", user);
-        }
-    }
-
-    public String logOut(HttpServletRequest request) {
-        if (request.getSession().getAttribute("user") != null) {
-            return "Invalid log out request";
+            response.sendRedirect("/home.html");
         } else {
-            request.getSession().setAttribute("user", null);
-            return "Successfully logged out";
+            response.sendRedirect("/login.html");
+        }
+    }
+
+    public void logOut(HttpServletRequest request, HttpServletResponse response) {
+
+        request.getSession().removeAttribute("user");
+        try {
+            response.sendRedirect("/login.html");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
-    public int registerUser(String fName, String lName, String email, String password, HttpServletRequest request) {
+    public void registerUser(String fName, String lName, String email, String password, HttpServletResponse response) {
         try {
-            return this.userDAO.register(fName, lName, email, password);
+            int registered = this.userDAO.register(fName, lName, email, password);
+            if (registered == 1) {
+                System.out.println("A new user has been registered!");
+                response.sendRedirect("/home.html");
+            } else
+                response.sendRedirect("/signup.html");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return 0;
     }
-
 
 
     // Testing purpose
@@ -104,21 +118,24 @@ public class MainModel {
     public void addToCart(String bid, HttpServletRequest request) {
         BookBean book = this.getBookById(bid);
         HashMap<BookBean, Integer> cart = this.getCart(request);
+
         int quantity = 1;
         if (cart.containsKey(book)) {
             quantity = cart.get(book) + 1;
         }
         cart.put(book, quantity);
-
+        System.out.println("cart = " + cart);
+        request.getSession().setAttribute("cart", cart);
     }
 
     public void removeFromCart(String bid, HttpServletRequest request) {
         HashMap<BookBean, Integer> cart = this.getCart(request);
         cart.remove(this.getBookById(bid));
+        request.getSession().setAttribute("cart", cart);
     }
 
     public void emptyCart(HttpServletRequest request) {
-        request.getSession().setAttribute("cart", new HashMap<BookBean, Integer>());
+        request.getSession().removeAttribute("cart");
     }
 
     public HashMap<BookBean, Integer> getCart(HttpServletRequest request) {
@@ -295,77 +312,79 @@ public class MainModel {
     /*
      * Orders
      */
-    
-    
+
+
     public void addPO(int uid, String status, int addressId, String date) {
-    	try {
-			this.poDAO.addPO(uid, status, addressId, date);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            this.poDAO.addPO(uid, status, addressId, date);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+
     public POBean getPObyId(int id) {
-    	try {
-			return this.poDAO.retrievePOByID(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return null;
+        try {
+            return this.poDAO.retrievePOByID(id);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
-    
+
     public ArrayList<POItemBean> getPOItemsbyPOId(int id) {
-    		try {
-				return this.poDAO.retrievePOItemsById(id);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		return null;
+        try {
+            return this.poDAO.retrievePOItemsById(id);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
-    
+
     public ArrayList<POItemBean> getPOItemsbyBookId(String bid) {
-    		try {
-				return this.poDAO.retrievePOItemsByBookId(bid);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		return null;
+        try {
+            return this.poDAO.retrievePOItemsByBookId(bid);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
-    
+
     public void addPOItem(int id, String bid, int price, int quantity) {
-    	try {
-			this.poDAO.addPOItem(id, bid, price, quantity);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            this.poDAO.addPOItem(id, bid, price, quantity);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
+
     /*
      * Visit Events
      */
-    
+
     public ArrayList<VisitEventBean> getAllVisitEvents() {
-    	try {
-			return this.visitEventDAO.retrieveAllVisitEvents();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return null;
+        try {
+            return this.visitEventDAO.retrieveAllVisitEvents();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
+
     public void addVisitEvent(String day, String bid, String type) {
-    	try {
-			this.visitEventDAO.addVisitEvent(day, bid, type);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            this.visitEventDAO.addVisitEvent(day, bid, type);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
+
     /*
      * For Analytics
      */
@@ -392,17 +411,17 @@ public class MainModel {
     /*
      * Payments
      */
-    public CardBean getCard(HttpServletRequest request){
+    public CardBean getCard(HttpServletRequest request) {
         UserBean userBean = (UserBean) request.getSession().getAttribute("user");
         return this.cardDAO.retrieveByUserId(userBean.getUserID());
     }
-    
+
     public void addCard(int uid, String cardNumber, String cvc, Date expiryDate) {
-    	try {
-			this.cardDAO.addCard(uid, cardNumber, cvc, expiryDate);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            this.cardDAO.addCard(uid, cardNumber, cvc, expiryDate);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

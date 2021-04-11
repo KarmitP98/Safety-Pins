@@ -85,5 +85,17 @@ public class BookBean {
         this.quantitySold = quantitySold;
     }
 
-
+    @Override
+    public String toString() {
+        return "BookBean{" +
+                "bid='" + bid + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", picture='" + picture + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", quantitySold=" + quantitySold +
+                '}';
+    }
 }

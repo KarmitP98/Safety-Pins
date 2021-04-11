@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Servlet implementation class ShoppingCart
@@ -56,10 +58,55 @@ public class ShoppingCart extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
 //		doGet(request, response);
-        HashMap<BookBean, Integer> cart = model.getCart(request);
 
-        response.getWriter().write(cart.size() > 0 ? cart.toString(): "There are no items in you cart. <br><br>" +
+        HashMap<BookBean, Integer> cart = model.getCart(request);
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<BookBean, Integer> book : cart.entrySet()) {
+            result.append(this.getItem(book.getKey(), book.getValue()));
+        }
+
+        response.getWriter().write(cart.size() > 0 ? result.toString() : "There are no items in you cart. <br><br>" +
                 "<h1><a href='home.html'>Browse our catalogue</a>");
+    }
+
+    private String getItem(BookBean book, int number) {
+        DecimalFormat df = new DecimalFormat("####0.00");
+        return "<div class=\"order-detail-item\">\n" +
+                "                <div class=\"list-partition\"></div>\n" +
+                "                <div class=\"order-item\">\n" +
+                "                    <div class=\"item-image\">\n" +
+                "                        <img alt=\"Book Cover 6\" src=\"" + book.getPicture() + "\"/>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"item-body\">\n" +
+                "                        <div class=\"item-header\">\n" +
+                "                            <div class=\"item-title\">" + book.getTitle() + "</div>\n" +
+                "                            <p>Paperback</p>\n" +
+                "                            <span><span class=\"material-icons\">bookmark</span> Backed\n" +
+                "\t\t\t\t\t\t\t\tby Safety ++. </span>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"item-details\">\n" +
+                "                            <div class=\"quantity\">\n" +
+                "                                Qty:&nbsp; <input max=\"10\" min=\"1\" name=\"qty\" placeholder=\"1\"\n" +
+                "                                                  type=\"number\" value=\"" + number + "\"/> &nbsp;&nbsp;<span class=\"add-sub\">\n" +
+                "\t\t\t\t\t\t\t\t\t<button class=\"button\" onclick=\"updateQuantity('" + book.getBid() + "',1)\">\n" +
+                "\t\t\t\t\t\t\t\t\t\t<span class=\"material-icons sub-item\">expand_less</span>\n" +
+                "\t\t\t\t\t\t\t\t\t</button> <span class=\"center-line\"></span>\n" +
+                "\t\t\t\t\t\t\t\t\t<button class=\"button\" onclick=\"updateQuantity('" + book.getBid() + "',-1)\">\n" +
+                "\t\t\t\t\t\t\t\t\t\t<span class=\"material-icons add-item\">expand_more</span>\n" +
+                "\t\t\t\t\t\t\t\t\t</button><span class=\"center-line\"></span>\n" +
+                "<button class=\"button\" onclick=\"updateQuantity('" + book.getBid() + "',-100000)\">\n" +
+                "\t\t\t\t\t\t\t\t\t\t<span class=\"material-icons add-item\">delete</span>\n" +
+                "\t\t\t\t\t\t\t\t\t</button>\n" +
+                "\t\t\t\t\t\t\t\t</span>\n" +
+                "                            </div>\n" +
+                "                            <div class=\"price\">\n" +
+                "                                Price: <span class=\"pvalue\">$ " + df.format(book.getPrice()) + "</span>\n" +
+                "                            </div>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>";
     }
 
 }

@@ -23,9 +23,11 @@
                     <span class="material-icons">home </span>
                 </div>
             </a> <span class="center-line"></span>
-            <div class="logout-btn">
-                <span class="material-icons">logout</span>
-            </div>
+            <a href="/logout">
+                <div class="logout-btn">
+                    <span class="material-icons">logout</span>
+                </div>
+            </a>
         </div>
     </div>
 </nav>
@@ -34,38 +36,7 @@
         <div class="title">Shopping Cart</div>
         <a class="remove-link">Remove all items</a>
         <div id="order-items">
-            <div class="order-detail-item">
-                <div class="list-partition"></div>
-                <div class="order-item">
-                    <div class="item-image">
-                        <img alt="Book Cover 6" src="assets/book-cover-16.jpg"/>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-header">
-                            <div class="item-title">The Outsider</div>
-                            <p>Paperback</p>
-                            <span><span class="material-icons">bookmark</span> Backed
-								by Safety ++. </span>
-                        </div>
-                        <div class="item-details">
-                            <div class="quantity">
-                                Qty:&nbsp; <input max="10" min="1" name="qty" placeholder="1"
-                                                  type="number"/> &nbsp;&nbsp;<span class="add-sub">
-									<button class="button">
-										<span class="material-icons add-item">expand_less</span>
-									</button> <span class="center-line"></span>
-									<button class="button">
-										<span class="material-icons sub-item">expand_more</span>
-									</button>
-								</span>
-                            </div>
-                            <div class="price">
-                                Price: <span class="pvalue">$ 12.99</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="order-detail-item">
                 <div class="list-partition"></div>
                 <div class="order-item">
@@ -134,7 +105,7 @@
     </div>
 
     <div class="order-total">
-        <div class="card-title">
+        <div class="card-title" id="order-title">
             <b>Subtotal</b> (3 Items): <b>$ 131.93</b>
         </div>
         <div class="card-subtitle">Taxes will be calculated at checkout</div>
