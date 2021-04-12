@@ -21,6 +21,8 @@ public class ProductDetail extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	
         response.setContentType("text/html");
         String result = "<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\n" +
                 "<html>\n" +
@@ -36,6 +38,9 @@ public class ProductDetail extends HttpServlet {
                 "<body>";
 
         String bid = request.getParameter("bid");
+        
+        // adds visitevent viewtype
+        MainModel.getInstance().addVisitEvent(bid, "VIEW");
 
         System.out.println("bid = " + bid);
 
@@ -48,6 +53,8 @@ public class ProductDetail extends HttpServlet {
         
         double rating = 0;
         for (ReviewBean review : reviews) {
+        	
+        	
         	rating += review.getRating();
         }
         rating = rating / reviews.size();

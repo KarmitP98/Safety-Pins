@@ -406,7 +406,7 @@ public class MainModel {
     	if (this.getCounter(request) % 3 == 0) {
     		status = "Denied";
     	}
-    	DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
     	Calendar cal = Calendar.getInstance();
     	String date = dateFormat.format(cal.getTime());
     	
@@ -416,8 +416,9 @@ public class MainModel {
     	
     	//adds POItems for each item in the cart
     	 for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
-             
     		 this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
+    		// add visitevent PURCHASE TYPE
+    		 this.addVisitEvent(item.getKey().getBid(), date);
     	 }
     	 
     	 this.incrementCounter(request);
@@ -449,7 +450,12 @@ public class MainModel {
         return null;
     }
 
-    public void addVisitEvent(String day, String bid, String type) {
+    public void addVisitEvent(String bid, String type) {
+    	
+    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+    	Calendar cal = Calendar.getInstance();
+    	String day = dateFormat.format(cal.getTime());
+    	
         try {
             this.visitEventDAO.addVisitEvent(day, bid, type);
         } catch (SQLException e) {
