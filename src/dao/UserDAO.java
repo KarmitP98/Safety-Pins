@@ -96,10 +96,7 @@ public class UserDAO extends DAO {
             String fname = rs.getString("FName");
             String userType = rs.getString("userType");
             String email = rs.getString("email");
-            System.out.println("email = " + email);
             String password = rs.getString("password");
-            System.out.println("password = " + password);
-            System.out.println("\t" + em + ",\t" + fname + "\t " + "\t " + userType);
         } // end while loop
         con.close();
     }

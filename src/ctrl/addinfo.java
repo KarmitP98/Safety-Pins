@@ -1,5 +1,6 @@
 package ctrl;
 
+import bean.UserBean;
 import model.MainModel;
 
 import javax.servlet.ServletException;
@@ -7,11 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import bean.UserBean;
-
 import java.io.IOException;
-import java.sql.Date;
 
 @WebServlet(name = "add-info", value = "/info")
 public class addinfo extends HttpServlet {
@@ -30,7 +27,10 @@ public class addinfo extends HttpServlet {
         String card = request.getParameter("card");
         String cvs = request.getParameter("cvs");
         String expiry = request.getParameter("expiry");
+
+        System.out.println("expiry = " + expiry);
         String phone = request.getParameter("phone");
+
 
 //        System.out.println("expiry = " + Date.valueOf(expiry));
 //        System.out.println("cvs = " + cvs);
@@ -44,7 +44,7 @@ public class addinfo extends HttpServlet {
         // Add Info
         // This info to address table and card table
         // Phone number empty
-        
+
         MainModel model = MainModel.getInstance();
         //Testing
         System.out.println("User Signing up: " + (UserBean)request.getSession().getAttribute("userSigningUp)"));
@@ -52,16 +52,15 @@ public class addinfo extends HttpServlet {
         model.addAddress(request, address, state, country, zip, phone);
         model.addCard(request, card, cvs, expiry);
 
-        
+
         if (request.getSession().getAttribute("userSigningUp") != null) {
-        request.getSession().setAttribute("userSigningUp", null); 
-        response.sendRedirect("home.jsp");
-        }
-        else {
-        	response.sendRedirect("reviewOrder.jsp");
+            request.getSession().setAttribute("userSigningUp", null);
+            response.sendRedirect("home.jsp");
+        } else {
+            response.sendRedirect("reviewOrder.jsp");
         }
 
 
-       
+
     }
 }

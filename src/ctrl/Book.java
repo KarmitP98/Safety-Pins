@@ -77,7 +77,7 @@ public class Book extends HttpServlet {
         StringBuilder result = new StringBuilder();
 
         for (BookBean book : books) {
-            System.out.println("book = " + book.toString());
+            System.out.println("book = " + book);
             result.append(getBookCard(book));
         }
 

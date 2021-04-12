@@ -19,7 +19,7 @@ public class additem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	//add visitevent CART TYPE
-    	MainModel.getInstance().addVisitEvent(request.getParameter("bid"), "CART");
+//    	MainModel.getInstance().addVisitEvent(request.getParameter("bid"), "CART");
     	
         MainModel.getInstance().addToCart(request.getParameter("bid"), request);
     }

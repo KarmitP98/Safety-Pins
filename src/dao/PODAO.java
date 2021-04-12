@@ -48,7 +48,7 @@ public class PODAO extends DAO {
     }
     // adds a new Purchase order and returns the poId
     public int addPO(int uid, String status, int addressId, String date) throws SQLException {
-        String query = "insert into PO values(null,?,?,?,?)";
+        String query = "insert into PO (uid, status, addressId, date) values(?,?,?,?)";
 
         Connection con = this.ds.getConnection();
         PreparedStatement stmt = con.prepareStatement(query);

@@ -21,7 +21,7 @@ public class UserLoad extends HttpServlet {
         response.setContentType("text/html");
 
         UserBean userBean = (UserBean) request.getSession().getAttribute("user");
-        System.out.println("userBean = " + userBean);
+
         if (userBean != null) {
             response.getWriter().write(userBean.getfName() + " " + userBean.getlName());
         } else {

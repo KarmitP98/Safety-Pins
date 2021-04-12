@@ -42,7 +42,6 @@ public class User extends HttpServlet {
         CardBean cardBean = mainModel.getCard(request);
 
         String json = new Gson().toJson(addressBean.toString() + "" + cardBean.toString());
-        System.out.println("json = " + json);
         response.getWriter().write(json);
         response.getWriter().flush();
 

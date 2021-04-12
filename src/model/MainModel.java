@@ -12,7 +12,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -218,9 +217,7 @@ public class MainModel {
 
     public ArrayList<BookBean> getAllBooks() {
         try {
-
             return this.bookDAO.fetchAllBooks();
-
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -425,9 +422,10 @@ public class MainModel {
 
     public void addPOandItems(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         UserBean user = (UserBean) request.getSession().getAttribute("user");
-        HashMap<BookBean, Integer> cart = (HashMap) request.getSession().getAttribute("cart");
-        AddressBean address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
+        HashMap<BookBean, Integer> cart = (HashMap<BookBean, Integer>) request.getSession().getAttribute("cart");
+        AddressBean address = this.getAddress(request);
 
+        System.out.println("address = " + address);
 
         String status = "Ordered";
         if (this.getCounter(request) % 3 == 0) {
@@ -445,15 +443,14 @@ public class MainModel {
         for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
             this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
             // add visitevent PURCHASE TYPE
-            this.addVisitEvent(item.getKey().getBid(), date);
+//            this.addVisitEvent(item.getKey().getBid(), date);
         }
 
         this.incrementCounter(request);
 
         try {
             if (status.equals("Ordered")) {
-
-                response.sendRedirect("/reviewOrder.jsp");
+                response.sendRedirect("/shipped.jsp");
             } else
                 response.sendRedirect("/error.jsp");
         } catch (IOException e) {
@@ -481,6 +478,7 @@ public class MainModel {
         Calendar cal = Calendar.getInstance();
         String day = dateFormat.format(cal.getTime());
 
+        System.out.println("day = " + day);
         try {
             this.visitEventDAO.addVisitEvent(day, bid, type);
         } catch (SQLException e) {

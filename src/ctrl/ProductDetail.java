@@ -42,7 +42,6 @@ public class ProductDetail extends HttpServlet {
         // adds visitevent viewtype
         MainModel.getInstance().addVisitEvent(bid, "VIEW");
 
-        System.out.println("bid = " + bid);
 
         // Fetch Book Information
         BookBean bookBean = MainModel.getInstance().getBookById(bid);

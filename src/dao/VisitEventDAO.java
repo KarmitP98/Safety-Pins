@@ -29,7 +29,7 @@ public class VisitEventDAO extends DAO {
 
         stmt.setString(1, day);
         stmt.setString(2, bid);
-        stmt.setString(3, type.toString());
+        stmt.setString(3, type);
 
         stmt.executeUpdate();
 
