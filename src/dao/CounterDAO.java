@@ -28,7 +28,13 @@ public class CounterDAO extends DAO {
 	        stmt.executeUpdate();
 
 	}
-
+	public void addCounter(int uid) throws SQLException {
+		String query = "INSERT INTO counter (uid) VALUES (?)";
+		 Connection con = this.ds.getConnection();
+         PreparedStatement p = con.prepareStatement(query);
+         p.setInt(1, uid);
+         p.executeUpdate();
+	}
 
 	public CounterBean getCounter(int uid) throws SQLException {
 		
@@ -42,7 +48,7 @@ public class CounterDAO extends DAO {
 	        ResultSet r = p.executeQuery();
 
 	        while (r.next()) {
-	            // using uID for review table ????
+	         
 	          int counter = r.getInt("counter");
 
 	           counterBean = new CounterBean(uid, counter);

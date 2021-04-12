@@ -131,19 +131,23 @@ public class BookDAO extends DAO {
     }
     
     
-    public ArrayList<BookBean> fetchAllBooks() throws SQLException {
+    @SuppressWarnings("unchecked")
+	public ArrayList<BookBean> fetchAllBooks() throws SQLException {
         return (ArrayList<BookBean>) this.fetchQuery("select * from Book", false);
     }
 
-    public ArrayList<BookBean> fetchBooksByCategory(String string) throws SQLException {
+    @SuppressWarnings("unchecked")
+	public ArrayList<BookBean> fetchBooksByCategory(String string) throws SQLException {
         return (ArrayList<BookBean>) this.fetchQuery("select * from Book where category like '%" + string + "%'", false);
     }
 
-    public ArrayList<BookBean> fetchBookbyNameandCategory(String name, String category) throws SQLException {
+    @SuppressWarnings("unchecked")
+	public ArrayList<BookBean> fetchBookbyNameandCategory(String name, String category) throws SQLException {
         return (ArrayList<BookBean>) this.fetchQuery("select * from Book where title like '%" + name + "%' and category like '%" + category + "%'", false);
     }
 
-    public ArrayList<BookBean> fetchBooksByTitleOrAuthor(String keyword) throws SQLException {
+    @SuppressWarnings("unchecked")
+	public ArrayList<BookBean> fetchBooksByTitleOrAuthor(String keyword) throws SQLException {
         return (ArrayList<BookBean>) this.fetchQuery("select * from Book where title like '%" + keyword + "%' or author like '%" + keyword + "%'", false);
     }
 
@@ -159,7 +163,26 @@ public class BookDAO extends DAO {
         stmt.executeUpdate();
     }
 
+    
     public ArrayList<BookBean> top10() throws SQLException {
-        return (ArrayList<BookBean>) this.fetchQuery("select top 10 * from Book order by sold desc", false);
-    }
+	    	String query = "select top 10 * from Book order by sold desc";
+	    	Connection con = this.ds.getConnection();
+	    	PreparedStatement p = con.prepareStatement(query);
+
+	    	ResultSet r = p.executeQuery();
+	    	ArrayList<BookBean> list = new ArrayList<BookBean>();
+	    	while(r.next()) {
+		    	String bid = r.getString("bid");
+	    		String title = r.getString("title");
+	    		double price = r.getDouble("price");
+	    		String author = r.getString("author");
+	    		String category = r.getString("category");
+	    		String picture = r.getString("picture");
+	    		String description = r.getString("description");
+	    		int sold = r.getInt("sold");
+	    		
+    		list.add(new BookBean(bid, title, price, author, category, picture, description, sold));
+    		}
+    	return list;
+      }
 }
