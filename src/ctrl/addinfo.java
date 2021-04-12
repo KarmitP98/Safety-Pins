@@ -1,13 +1,12 @@
 package ctrl;
 
+import model.MainModel;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.MainModel;
-
 import java.io.IOException;
 import java.sql.Date;
 
@@ -28,16 +27,25 @@ public class addinfo extends HttpServlet {
         String card = request.getParameter("card");
         String cvs = request.getParameter("cvs");
         String expiry = request.getParameter("expiry");
+        String phone = request.getParameter("phone");
 
-        System.out.println("expiry = " + expiry);
+//        System.out.println("expiry = " + Date.valueOf(expiry));
+//        System.out.println("cvs = " + cvs);
+//        System.out.println("card = " + card);
+//        System.out.println("zip = " + zip);
+//        System.out.println("country = " + country);
+//        System.out.println("state = " + state);
+//        System.out.println("city = " + city);
+//        System.out.println("address = " + address);
 
         // Add Info
         // This info to address table and card table
         // Phone number empty
         
         MainModel model = MainModel.getInstance();
-        model.addAddress(request, address, state, country, zip, "");
+        model.addAddress(request, address, state, country, zip, phone);
         model.addCard(request, card, cvs, Date.valueOf(expiry));
+
         
         if (request.getSession().getAttribute("userSigningUp") != null) {
         request.getSession().setAttribute("userSigningUp", null); 
@@ -46,6 +54,10 @@ public class addinfo extends HttpServlet {
         else {
         	response.sendRedirect("reviewOrder.jsp");
         }
-        
+
+
+//        response.sendRedirect("home.jsp");
+//>>>>>>> 19f4f80abc2d3337466b417743440feec12e8c22
+       
     }
 }

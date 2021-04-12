@@ -81,10 +81,13 @@ public class MainModel {
 
             // If Admin
             // Redirect to report-page.html
+
             // deleted / for eclipse
             else if (user.getUserType().equals("Administrator"))
-            response.sendRedirect("report-page.html");
-            
+           
+
+            response.sendRedirect("/report-page.jsp");
+          
             // If Partner
             // Redirect to the rest service page
             else {
@@ -111,10 +114,15 @@ public class MainModel {
 
     }
 
+
     public void registerUser(String fName, String lName, String email, String password, HttpServletRequest request, HttpServletResponse response) {
+
         try {
             int registered = this.userDAO.register(fName, lName, email, password);
             if (registered == 1) {
+                UserBean userBean = this.userDAO.fetchUserByEmail(email);
+                request.getSession().setAttribute("user", userBean);
+
                 System.out.println("A new user has been registered!");
                 request.getSession().setAttribute("userSigningUp", this.userDAO.fetchUserByEmail(email));
                 // deleted / for eclipse

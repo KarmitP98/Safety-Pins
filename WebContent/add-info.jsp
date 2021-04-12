@@ -35,7 +35,7 @@
 </nav>
 <div class="main-content-area">
     <div class="add-info">
-        <form class="input-area" action="info" method="get">
+        <form class="input-area" action="${pageContext.request.contextPath}/info" method="get">
             <div class="title">Shipping Address</div>
             <fieldset id="ad_field">
                 <label for="addressLine">Address</label>
@@ -122,9 +122,15 @@
                 </fieldset>
             </div>
             <br>
-            <button type="submit" value="add" class="button-primary button">Add</button>
+            <button type="submit" value="info" class="button-primary button">Add</button>
         </form>
     </div>
 </div>
+<script>
+    function addInfo()
+    {
+
+    }
+</script>
 </body>
 </html>
