@@ -73,7 +73,7 @@ public class ReviewDAO extends DAO {
 
     public int addReview(String bid, int uid, double rating, String subject, String description) throws SQLException {
 
-        String preparedStatement = "insert into Review values(null,?,?,?,?,?)";
+        String preparedStatement = "insert into Review (bid,uid, rating, subject, description) values(?,?,?,?,?)";
         Connection con = this.ds.getConnection();
         PreparedStatement stmt = con.prepareStatement(preparedStatement);
         stmt.setString(1, bid);
