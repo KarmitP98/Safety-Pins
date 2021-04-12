@@ -16,11 +16,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class MainModel {
 
@@ -32,7 +28,7 @@ public class MainModel {
     private VisitEventDAO visitEventDAO;
     private ReviewDAO reviewDAO;
     private AddressDAO addressDAO;
-    private CounterDAO	counterDAO;
+    private CounterDAO counterDAO;
     // DAOs need to be declared
 
     private MainModel() {
@@ -77,27 +73,27 @@ public class MainModel {
             // If Visitor || Customer
             // deleted / for eclipse
             if (user.getUserType().equals("Customer"))
-            response.sendRedirect("home.jsp");
+                response.sendRedirect("home.jsp");
 
-            // If Admin
-            // Redirect to report-page.html
+                // If Admin
+                // Redirect to report-page.html
 
-            // deleted / for eclipse
+                // deleted / for eclipse
             else if (user.getUserType().equals("Administrator"))
-           
 
-            response.sendRedirect("/report-page.jsp");
-          
-            // If Partner
-            // Redirect to the rest service page
+
+                response.sendRedirect("/report-page.jsp");
+
+                // If Partner
+                // Redirect to the rest service page
             else {
-            	//redirect to home temporarily
-            	response.sendRedirect("home.jsp");
+                //redirect to home temporarily
+                response.sendRedirect("home.jsp");
             }
-            	
-            
+
+
         } else {
-        	 // deleted / for eclipse
+            // deleted / for eclipse
             response.sendRedirect("login.html");
         }
     }
@@ -106,7 +102,7 @@ public class MainModel {
 
         request.getSession().removeAttribute("user");
         try {
-        	 // deleted / for eclipse
+            // deleted / for eclipse
             response.sendRedirect("login.html");
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,12 +120,12 @@ public class MainModel {
                 request.getSession().setAttribute("user", userBean);
 
                 System.out.println("A new user has been registered!");
-                request.getSession().setAttribute("userSigningUp", this.userDAO.fetchUserByEmail(email));
+                request.getSession().setAttribute("userSigningUp", userBean);
                 // deleted / for eclipse
                 response.sendRedirect("add-info.jsp");
-                
+
             } else
-            	 // deleted / for eclipse
+                // deleted / for eclipse
                 response.sendRedirect("signup.html");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -138,8 +134,8 @@ public class MainModel {
     }
 
     public String getUserFullNameByUid(int uid) {
-    	UserBean user = this.userDAO.fetchUserByID(uid);
-    	return user.getfName() + " " + user.getlName();
+        UserBean user = this.userDAO.fetchUserByID(uid);
+        return user.getfName() + " " + user.getlName();
     }
 
     // Testing purpose
@@ -275,8 +271,8 @@ public class MainModel {
      */
     // getProductInfo(bid)
     public String getProductInfo(String bid) throws SQLException, JAXBException, IOException {
-      
-    	BookBean book = this.bookDAO.retrieveByBookId(bid);
+
+        BookBean book = this.bookDAO.retrieveByBookId(bid);
         if (book == null) {
             return null;
         }
@@ -309,31 +305,31 @@ public class MainModel {
     public String getOrdersByPartNumber(String bid) throws SQLException, JAXBException, IOException {
 
         String result = "";
-    	ArrayList<POItemBean> poItems; 
-    	
-    	poItems= this.poDAO.retrievePOItemsByBookId(bid);
-    	ArrayList<OrderWrapper> wrapperList = new ArrayList<OrderWrapper>();
-    	if (poItems == null) return "No orders for the productId available";
-     	for (POItemBean item : poItems) {
-    		int pid =  item.getId();
-    		POBean po = this.getPObyId(pid);
-    		ArrayList<POItemBean> itemList = this.getPOItemsbyPOId(pid);
-    		wrapperList.add(new OrderWrapper(po.getDate(), this.addressDAO.retrieveAddressByUserId(po.getUserID()), this.addressDAO.retrieveAddressByUserId(po.getUserID()), itemList, pid, po.getUserID() ));
-     	}
-     	
-        for (OrderWrapper wrapper : wrapperList) {
-        	 JAXBContext jc = JAXBContext.newInstance(wrapper.getClass());
-             Marshaller marshaller = jc.createMarshaller();
-             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+        ArrayList<POItemBean> poItems;
 
-             StringWriter sw = new StringWriter();
-             sw.write("\n");
-             marshaller.marshal(wrapper, new StreamResult(sw));
-
-             result += sw.toString();
+        poItems = this.poDAO.retrievePOItemsByBookId(bid);
+        ArrayList<OrderWrapper> wrapperList = new ArrayList<OrderWrapper>();
+        if (poItems == null) return "No orders for the productId available";
+        for (POItemBean item : poItems) {
+            int pid = item.getId();
+            POBean po = this.getPObyId(pid);
+            ArrayList<POItemBean> itemList = this.getPOItemsbyPOId(pid);
+            wrapperList.add(new OrderWrapper(po.getDate(), this.addressDAO.retrieveAddressByUserId(po.getUserID()), this.addressDAO.retrieveAddressByUserId(po.getUserID()), itemList, pid, po.getUserID()));
         }
-        
+
+        for (OrderWrapper wrapper : wrapperList) {
+            JAXBContext jc = JAXBContext.newInstance(wrapper.getClass());
+            Marshaller marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+
+            StringWriter sw = new StringWriter();
+            sw.write("\n");
+            marshaller.marshal(wrapper, new StreamResult(sw));
+
+            result += sw.toString();
+        }
+
         return result;
     }
 
@@ -356,9 +352,9 @@ public class MainModel {
     public void addAddress(HttpServletRequest request, String street, String province, String country, String zip,
                            String phone) {
         UserBean user = (UserBean) request.getSession().getAttribute("user");
-        if (user == null) 
-        	user = (UserBean) request.getSession().getAttribute("userSigningUp");
-        
+        if (user == null)
+            user = (UserBean) request.getSession().getAttribute("userSigningUp");
+
         try {
             this.addressDAO.addAddress(user.getUserID(), street, province, country, zip, phone);
         } catch (SQLException e) {
@@ -373,14 +369,14 @@ public class MainModel {
 
 
     public int addPO(int uid, String status, int addressId, String date) {
-    	int pid = 0;
-    	try {
-           pid = this.poDAO.addPO(uid, status, addressId, date);
+        int pid = 0;
+        try {
+            pid = this.poDAO.addPO(uid, status, addressId, date);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    	return pid;
+        return pid;
     }
 
     public POBean getPObyId(int id) {
@@ -423,44 +419,42 @@ public class MainModel {
     }
 
     public void addPOandItems(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-    	UserBean user = (UserBean) request.getSession().getAttribute("user");
-    	HashMap<BookBean, Integer> cart = (HashMap) request.getSession().getAttribute("cart");
-    	AddressBean address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
-    	
-    
-    	String status = "Ordered";
-    	if (this.getCounter(request) % 3 == 0) {
-    		status = "Denied";
-    	}
-    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
-    	Calendar cal = Calendar.getInstance();
-    	String date = dateFormat.format(cal.getTime());
-    	
-    	
-    	//adds a new purchase order
-    	int pid = addPO(user.getUserID(), status, address.getId(), date);
-    	
-    	//adds POItems for each item in the cart
-    	 for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
-    		 this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
-    		// add visitevent PURCHASE TYPE
-    		 this.addVisitEvent(item.getKey().getBid(), date);
-    	 }
-    	 
-    	 this.incrementCounter(request);
-    	 
-    	 try {
-	    	 if (status.equals("Ordered")) {
-	    		 
-					response.sendRedirect("/reviewOrder.jsp");
-	    	 }
-	    	 else
-	    		 response.sendRedirect("/error.jsp");
-    	 }
-    	 catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        HashMap<BookBean, Integer> cart = (HashMap) request.getSession().getAttribute("cart");
+        AddressBean address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
+
+
+        String status = "Ordered";
+        if (this.getCounter(request) % 3 == 0) {
+            status = "Denied";
+        }
+        DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+        Calendar cal = Calendar.getInstance();
+        String date = dateFormat.format(cal.getTime());
+
+
+        //adds a new purchase order
+        int pid = addPO(user.getUserID(), status, address.getId(), date);
+
+        //adds POItems for each item in the cart
+        for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
+            this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
+            // add visitevent PURCHASE TYPE
+            this.addVisitEvent(item.getKey().getBid(), date);
+        }
+
+        this.incrementCounter(request);
+
+        try {
+            if (status.equals("Ordered")) {
+
+                response.sendRedirect("/reviewOrder.jsp");
+            } else
+                response.sendRedirect("/error.jsp");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     /*
      * Visit Events
@@ -477,11 +471,11 @@ public class MainModel {
     }
 
     public void addVisitEvent(String bid, String type) {
-    	
-    	DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
-    	Calendar cal = Calendar.getInstance();
-    	String day = dateFormat.format(cal.getTime());
-    	
+
+        DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+        Calendar cal = Calendar.getInstance();
+        String day = dateFormat.format(cal.getTime());
+
         try {
             this.visitEventDAO.addVisitEvent(day, bid, type);
         } catch (SQLException e) {
@@ -522,10 +516,13 @@ public class MainModel {
     }
 
     public void addCard(HttpServletRequest request, String cardNumber, String cvc, Date expiryDate) {
-    	UserBean userBean = (UserBean) request.getSession().getAttribute("user");
-   
-    	   if (userBean == null) 
-           	userBean = (UserBean) request.getSession().getAttribute("userSigningUp");
+        UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+
+        System.out.println("User = " + userBean);
+
+        if (userBean == null)
+            userBean = (UserBean) request.getSession().getAttribute("userSigningUp");
+        System.out.println("userSigningUp = " + userBean);
         try {
             this.cardDAO.addCard(userBean.getUserID(), cardNumber, cvc, expiryDate);
         } catch (SQLException e) {
@@ -533,25 +530,25 @@ public class MainModel {
             e.printStackTrace();
         }
     }
-    
+
     public void incrementCounter(HttpServletRequest request) {
-    	UserBean user = (UserBean) request.getSession().getAttribute("user");
-    	try {
-			this.counterDAO.incrementCounter(user.getUserID());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        try {
+            this.counterDAO.incrementCounter(user.getUserID());
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
+
     public int getCounter(HttpServletRequest request) {
-    	UserBean user = (UserBean) request.getSession().getAttribute("user");
-    	try {
-			return this.counterDAO.getCounter(user.getUserID()).getCounter();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return 0;
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        try {
+            return this.counterDAO.getCounter(user.getUserID()).getCounter();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

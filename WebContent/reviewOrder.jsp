@@ -1,4 +1,10 @@
-<%@ page import="bean.UserBean" %><%--
+<%@ page import="bean.UserBean" %>
+<%@ page import="bean.AddressBean" %>
+<%@ page import="model.MainModel" %>
+<%@ page import="bean.CardBean" %>
+<%@ page import="sun.applet.Main" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDateTime" %><%--
   Created by IntelliJ IDEA.
   User: Karmit
   Date: 11-Apr.-2021
@@ -23,6 +29,23 @@
     if (userBean == null) {
         response.sendRedirect("login.html");
     }
+    AddressBean address = MainModel.getInstance().getAddress(request);
+    if (address == null) {
+        address = new AddressBean();
+        address.setStreet("123 Playground Street");
+        address.setProvince("LA");
+        address.setZip("123 456");
+        address.setCountry("USA");
+        address.setPhone("+1-123-456-7890");
+    }
+    ;
+
+    CardBean card = MainModel.getInstance().getCard(request);
+    if (card == null) {
+        card = new CardBean();
+        card.setCardNumber("252551426780");
+        card.setCvc("123");
+    }
 %>
 <nav>
     <div class="navbar">
@@ -40,7 +63,7 @@
             <span class="center-line"></span>
             <a href="<%= userBean!= null ? "/logout":"login.html"%>">
                 <div class="logout-btn">
-                    <span class="material-icons"><%= userBean!= null ? "logout":"login"%></span>
+                    <span class="material-icons"><%= userBean != null ? "logout" : "login"%></span>
                 </div>
             </a>
         </div>
@@ -52,19 +75,24 @@
             <div class="section">
                 <div class="section-title">Shipping Address</div>
                 <div class="section-body" id="address">
-                    <p class="address">123 Playground Street</p>
-                    <p class="city">Bussiness Park, LA, 123 456</p>
-                    <p class="country">USA</p>
-                    <p class="phone">Phone: +1-215-512-2525</p>
+                    <p class="address"><%=address.getStreet()%>
+                    </p>
+                    <p class="city"><%=address.getProvince()%>, <%=address.getZip()%>
+                    </p>
+                    <p class="country"><%=address.getCountry()%>
+                    </p>
+                    <p class="phone">Phone: <%=address.getPhone()%>
+                    </p>
                 </div>
             </div>
             <div class="section">
                 <div class="section-title">Choose a payment method</div>
                 <div class="section-body">
                     <p class="card" id="card-info">
-                        <span class="material-icons">payment</span>ending in 4848
+                        <span class="material-icons">payment</span>ending in
+                        <%=card.getCardNumber().substring(card.getCardNumber().length() - 4)%>
                     </p>
-                    <a href="add-info.jsp">Change payment method</a>
+                    <%--                    <a href="add-info.jsp">Change payment method</a>--%>
                 </div>
             </div>
         </div>
