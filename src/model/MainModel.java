@@ -100,10 +100,13 @@ public class MainModel {
 
     }
 
-    public void registerUser(String fName, String lName, String email, String password, HttpServletResponse response) {
+    public void registerUser(String fName, String lName, String email, String password, HttpServletResponse response, HttpServletRequest request) {
         try {
             int registered = this.userDAO.register(fName, lName, email, password);
             if (registered == 1) {
+                UserBean userBean = this.userDAO.fetchUserByEmail(email);
+                request.getSession().setAttribute("user", userBean);
+
                 System.out.println("A new user has been registered!");
                 response.sendRedirect("/add-info.jsp");
             } else
