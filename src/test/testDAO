@@ -21,7 +21,7 @@ import dao.CardDAO;
 import dao.PODAO;
 import dao.ReviewDAO;
 
-public class TestingDAO {
+public class testDAO {
 
 
 
