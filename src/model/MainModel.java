@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -71,11 +74,15 @@ public class MainModel {
 
             // Check user type
 
-            // If Visitor
+            // If Visitor || Customer
             response.sendRedirect("/home.jsp");
 
             // If Admin
             // Redirect to report-page.html
+            response.sendRedirect("/report-page.html");
+            
+            // If Partner
+            // Redirect to the rest service page
             
         } else {
             response.sendRedirect("/login.html");
@@ -245,7 +252,8 @@ public class MainModel {
      */
     // getProductInfo(bid)
     public String getProductInfo(String bid) throws SQLException, JAXBException, IOException {
-        BookBean book = this.bookDAO.FetchBookByID(bid);
+      
+    	BookBean book = this.bookDAO.retrieveByBookId(bid);
         if (book == null) {
             return null;
         }
@@ -370,10 +378,20 @@ public class MainModel {
         }
     }
 
-    public void addPOandItems(HttpServletRequest request, String status, String date) throws SQLException {
+    public void addPOandItems(HttpServletRequest request, HttpServletResponse response) throws SQLException {
     	UserBean user = (UserBean) request.getSession().getAttribute("user");
     	HashMap<BookBean, Integer> cart = (HashMap) request.getSession().getAttribute("cart");
     	AddressBean address = this.addressDAO.retrieveAddressByUserId(user.getUserID());
+    	
+    
+    	String status = "Ordered";
+    	if (this.getCounter(request) % 3 == 0) {
+    		status = "Denied";
+    	}
+    	DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+    	Calendar cal = Calendar.getInstance();
+    	String date = dateFormat.format(cal.getTime());
+    	
     	
     	//adds a new purchase order
     	int pid = addPO(user.getUserID(), status, address.getId(), date);
@@ -382,10 +400,23 @@ public class MainModel {
     	 for (Map.Entry<BookBean, Integer> item : cart.entrySet()) {
              
     		 this.addPOItem(pid, item.getKey().getBid(), item.getKey().getPrice(), item.getValue());
-         }
-
-    	
-    };
+    	 }
+    	 
+    	 this.incrementCounter(request);
+    	 
+    	 try {
+	    	 if (status.equals("Ordered")) {
+	    		 
+					response.sendRedirect("/reviewOrder.jsp");
+	    	 }
+	    	 else
+	    		 response.sendRedirect("/error.jsp");
+    	 }
+    	 catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+    }
     /*
      * Visit Events
      */
