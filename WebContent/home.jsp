@@ -33,7 +33,7 @@
 						</span>
                 </div>
             </a> <span class="center-line"></span>
-            <a href="<%= userBean!= null ? "/logout":"login.html"%>">
+            <a href="<%= userBean!= null ? "logout":"login.html"%>">
             <div class="logout-btn">
                 <span class="material-icons"><%= userBean != null ? "logout" : "login"%></span>
             </div>

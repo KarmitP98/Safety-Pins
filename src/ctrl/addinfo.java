@@ -34,10 +34,18 @@ public class addinfo extends HttpServlet {
         // Add Info
         // This info to address table and card table
         // Phone number empty
+        
         MainModel model = MainModel.getInstance();
         model.addAddress(request, address, state, country, zip, "");
         model.addCard(request, card, cvs, Date.valueOf(expiry));
         
+        if (request.getSession().getAttribute("userSigningUp") != null) {
+        request.getSession().setAttribute("userSigningUp", null); 
+        response.sendRedirect("home.jsp");
+        }
+        else {
+        	response.sendRedirect("reviewOrder.jsp");
+        }
         
     }
 }

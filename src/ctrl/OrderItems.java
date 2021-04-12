@@ -27,6 +27,7 @@ public class OrderItems extends HttpServlet {
 
         // Update counter, add items to PO.... -> In the main methods
     	try {
+    		
 			MainModel.getInstance().addPOandItems(request,response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

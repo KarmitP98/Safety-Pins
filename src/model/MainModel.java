@@ -75,17 +75,27 @@ public class MainModel {
             // Check user type
 
             // If Visitor || Customer
-            response.sendRedirect("/home.jsp");
+            // deleted / for eclipse
+            if (user.getUserType().equals("Customer"))
+            response.sendRedirect("home.jsp");
 
             // If Admin
             // Redirect to report-page.html
-            response.sendRedirect("/report-page.html");
+            // deleted / for eclipse
+            else if (user.getUserType().equals("Administrator"))
+            response.sendRedirect("report-page.html");
             
             // If Partner
             // Redirect to the rest service page
+            else {
+            	//redirect to home temporarily
+            	response.sendRedirect("home.jsp");
+            }
+            	
             
         } else {
-            response.sendRedirect("/login.html");
+        	 // deleted / for eclipse
+            response.sendRedirect("login.html");
         }
     }
 
@@ -93,21 +103,26 @@ public class MainModel {
 
         request.getSession().removeAttribute("user");
         try {
-            response.sendRedirect("/login.html");
+        	 // deleted / for eclipse
+            response.sendRedirect("login.html");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void registerUser(String fName, String lName, String email, String password, HttpServletResponse response) {
+    public void registerUser(String fName, String lName, String email, String password, HttpServletRequest request, HttpServletResponse response) {
         try {
             int registered = this.userDAO.register(fName, lName, email, password);
             if (registered == 1) {
                 System.out.println("A new user has been registered!");
-                response.sendRedirect("/add-info.jsp");
+                request.getSession().setAttribute("userSigningUp", this.userDAO.fetchUserByEmail(email));
+                // deleted / for eclipse
+                response.sendRedirect("add-info.jsp");
+                
             } else
-                response.sendRedirect("/signup.html");
+            	 // deleted / for eclipse
+                response.sendRedirect("signup.html");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -333,6 +348,9 @@ public class MainModel {
     public void addAddress(HttpServletRequest request, String street, String province, String country, String zip,
                            String phone) {
         UserBean user = (UserBean) request.getSession().getAttribute("user");
+        if (user == null) 
+        	user = (UserBean) request.getSession().getAttribute("userSigningUp");
+        
         try {
             this.addressDAO.addAddress(user.getUserID(), street, province, country, zip, phone);
         } catch (SQLException e) {
@@ -497,6 +515,9 @@ public class MainModel {
 
     public void addCard(HttpServletRequest request, String cardNumber, String cvc, Date expiryDate) {
     	UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+   
+    	   if (userBean == null) 
+           	userBean = (UserBean) request.getSession().getAttribute("userSigningUp");
         try {
             this.cardDAO.addCard(userBean.getUserID(), cardNumber, cvc, expiryDate);
         } catch (SQLException e) {
