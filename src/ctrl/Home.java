@@ -59,9 +59,7 @@ public class Home extends HttpServlet {
 
             writer.append(list.get(0).getAuthor());
         } else if (request.getParameter("logIn") != null) {
-
             request.getRequestDispatcher("/LogIn.jspx").forward(request, response);
-
 
         } else if (request.getParameter("logOut") != null) {
             //
