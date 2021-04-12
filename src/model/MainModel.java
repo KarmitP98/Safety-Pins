@@ -471,9 +471,10 @@ public class MainModel {
         return this.cardDAO.retrieveByUserId(userBean.getUserID());
     }
 
-    public void addCard(int uid, String cardNumber, String cvc, Date expiryDate) {
+    public void addCard(HttpServletRequest request, String cardNumber, String cvc, Date expiryDate) {
+    	UserBean userBean = (UserBean) request.getSession().getAttribute("user");
         try {
-            this.cardDAO.addCard(uid, cardNumber, cvc, expiryDate);
+            this.cardDAO.addCard(userBean.getUserID(), cardNumber, cvc, expiryDate);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

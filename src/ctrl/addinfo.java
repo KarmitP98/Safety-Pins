@@ -5,7 +5,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.MainModel;
+
 import java.io.IOException;
+import java.sql.Date;
 
 @WebServlet(name = "add-info", value = "/info")
 public class addinfo extends HttpServlet {
@@ -22,12 +26,18 @@ public class addinfo extends HttpServlet {
         String country = request.getParameter("country");
         String zip = request.getParameter("zip");
         String card = request.getParameter("card");
-        int cvs = Integer.parseInt(request.getParameter("cvs"));
+        String cvs = request.getParameter("cvs");
         String expiry = request.getParameter("expiry");
 
         System.out.println("expiry = " + expiry);
 
         // Add Info
         // This info to address table and card table
+        // Phone number empty
+        MainModel model = MainModel.getInstance();
+        model.addAddress(request, address, state, country, zip, "");
+        model.addCard(request, card, cvs, Date.valueOf(expiry));
+        
+        
     }
 }
