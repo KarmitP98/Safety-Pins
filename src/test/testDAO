@@ -1,0 +1,67 @@
+package testing;
+
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import bean.BookBean;
+import bean.POItemBean;
+import bean.ReviewBean;
+import dao.BookDAO;
+import dao.CardDAO;
+import dao.PODAO;
+import dao.ReviewDAO;
+
+public class TestingDAO {
+
+
+
+	@Test(timeout = 50000)
+	void testPerFetchBookByID() throws ClassNotFoundException, SQLException {
+		/*BookDAO obj =  new BookDAO();
+		obj.addCard();*/
+		
+		CardDAO obj =  new CardDAO();
+		obj.addCard(1, "4276473297398", "7878", "6263632");
+	}
+
+
+	@Test(timeout = 50000)
+	void testBookDAO() throws ClassNotFoundException, SQLException {
+		/*BookDAO obj =  new BookDAO();
+		obj.addCard();*/
+		ArrayList<BookBean> arraylist;
+		BookDAO obj =  new BookDAO();
+		arraylist = obj.fetchBooksByCategory("Educated");
+	}
+	
+	
+	
+	
+	@Test(timeout = 50000)
+	void testPODAO() throws ClassNotFoundException, SQLException {
+		ArrayList<POItemBean> arraylist;
+		PODAO obj =  new PODAO();
+		arraylist = obj.retrievePOItemsByBookId("01");
+	}
+	
+		@Test(timeout = 50000)
+		void ReviewDAO() throws ClassNotFoundException, SQLException {
+		 ArrayList<ReviewBean> arraylist;
+		 ReviewDAO obj =  new ReviewDAO();
+			arraylist = obj. retrieveReviewsbyBookID("01");
+		}
+		
+
+	
+	
+}
