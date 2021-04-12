@@ -79,7 +79,7 @@ public class MainModel {
 
             // If Admin
             // Redirect to report-page.html
-            response.sendRedirect("/report-page.html");
+            response.sendRedirect("/report-page.jsp");
             
             // If Partner
             // Redirect to the rest service page
