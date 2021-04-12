@@ -16,6 +16,10 @@ public class AddressBean {
         this.phone = phone;
     }
 
+    public AddressBean() {
+
+    }
+
     public int getId() {
         return id;
     }

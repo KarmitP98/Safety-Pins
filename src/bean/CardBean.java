@@ -19,6 +19,10 @@ public class CardBean {
 
     }
 
+    public CardBean() {
+
+    }
+
     public int getId() {
         return id;
     }
