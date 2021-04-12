@@ -6,10 +6,10 @@ public class CardBean {
 
     private int id, uid;
     private String cardNumber, cvc;
-    private Date expiryDate;
+    private String expiryDate;
 
 
-    public CardBean(int id, int uid, String cardNumber, String cvc, Date expiryDate) {
+    public CardBean(int id, int uid, String cardNumber, String cvc, String expiryDate) {
         super();
         this.id = id;
         this.uid = uid;
@@ -51,11 +51,11 @@ public class CardBean {
         this.cvc = cvc;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 

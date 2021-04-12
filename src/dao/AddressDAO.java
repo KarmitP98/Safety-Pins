@@ -46,7 +46,7 @@ public class AddressDAO extends DAO {
     public int addAddress(int uid, String street, String province, String country, String zip, String phone) throws SQLException {
 
 
-        String query = "insert into Address values(null,?,?,?,?,?,?)";
+        String query = "insert into Address (uid, street, province, country, zip, phone) values(?,?,?,?,?,?)";
         Connection con = this.ds.getConnection();
         PreparedStatement stmt = con.prepareStatement(query);
 

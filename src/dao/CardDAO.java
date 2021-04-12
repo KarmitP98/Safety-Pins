@@ -25,7 +25,7 @@ public class CardDAO extends DAO {
                 int id = r.getInt("id");
                 String cardNumber = r.getString("cardNumber");
                 String cvc = r.getString("cvc");
-                Date expiry = r.getDate("expiryDate");
+                String expiry = r.getString("expiryDate");
 
                 card = new CardBean(id, uid, cardNumber, cvc, expiry);
 
@@ -37,15 +37,15 @@ public class CardDAO extends DAO {
 
     }
 
-    public int addCard(int uid, String cardNumber, String cvc, Date expiryDate) throws SQLException {
-        String query = "insert into card values(null,?,?,?,?)";
+    public int addCard(int uid, String cardNumber, String cvc, String expiryDate) throws SQLException {
+        String query = "insert into card (uid, cardnumber, cvc, expirydate) values(?,?,?,?)";
 
         Connection con = this.ds.getConnection();
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setInt(1, uid);
         stmt.setString(2, cardNumber);
         stmt.setString(3, cvc);
-        stmt.setDate(4, expiryDate);
+        stmt.setString(4, expiryDate);
 
         return stmt.executeUpdate();
 

@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bean.UserBean;
+
 import java.io.IOException;
 import java.sql.Date;
 
@@ -43,8 +46,11 @@ public class addinfo extends HttpServlet {
         // Phone number empty
         
         MainModel model = MainModel.getInstance();
+        //Testing
+        System.out.println("User Signing up: " + (UserBean)request.getSession().getAttribute("userSigningUp)"));
+        System.out.println("user Info" + (UserBean) request.getSession().getAttribute("user"));
         model.addAddress(request, address, state, country, zip, phone);
-        model.addCard(request, card, cvs, Date.valueOf(expiry));
+        model.addCard(request, card, cvs, expiry);
 
         
         if (request.getSession().getAttribute("userSigningUp") != null) {
@@ -56,8 +62,6 @@ public class addinfo extends HttpServlet {
         }
 
 
-//        response.sendRedirect("home.jsp");
-//>>>>>>> 19f4f80abc2d3337466b417743440feec12e8c22
        
     }
 }

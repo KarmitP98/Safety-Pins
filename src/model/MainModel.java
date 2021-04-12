@@ -122,8 +122,9 @@ public class MainModel {
             if (registered == 1) {
                 UserBean userBean = this.userDAO.fetchUserByEmail(email);
                 request.getSession().setAttribute("user", userBean);
-
+                this.counterDAO.addCounter(userBean.getUserID());
                 System.out.println("A new user has been registered!");
+                
                 request.getSession().setAttribute("userSigningUp", this.userDAO.fetchUserByEmail(email));
                 // deleted / for eclipse
                 response.sendRedirect("add-info.jsp");
@@ -358,7 +359,7 @@ public class MainModel {
         UserBean user = (UserBean) request.getSession().getAttribute("user");
         if (user == null) 
         	user = (UserBean) request.getSession().getAttribute("userSigningUp");
-        
+        System.out.println(user.toString());
         try {
             this.addressDAO.addAddress(user.getUserID(), street, province, country, zip, phone);
         } catch (SQLException e) {
@@ -521,7 +522,7 @@ public class MainModel {
         return this.cardDAO.retrieveByUserId(userBean.getUserID());
     }
 
-    public void addCard(HttpServletRequest request, String cardNumber, String cvc, Date expiryDate) {
+    public void addCard(HttpServletRequest request, String cardNumber, String cvc, String expiryDate) {
     	UserBean userBean = (UserBean) request.getSession().getAttribute("user");
    
     	   if (userBean == null) 
