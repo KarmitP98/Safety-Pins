@@ -1,56 +1,57 @@
-/*
- Remove all the tables in same order
- */
+DROP TABLE BOOK;
 
-DROP TABLE IF EXISTS Card;
-DROP TABLE IF EXISTS Review;
-DROP TABLE if exists POItem;
-DROP TABLE if exists PO;
-DROP TABLE if exists Address;
-DROP TABLE if exists VisitEvent;
-DROP TABLE if exists Book;
-DROP TABLE IF EXISTS User;
-
-use
-final;
-/** bid: unique identifier of Book (like ISBN)
-* title: title of Book
-* price: unit price WHEN ordered
-* author: name of authors
-* category: as specified
-  picture: Picture for the book
-  Description: Short Description for the book
-  Sold: Number of books sold
-*/
-CREATE TABLE Book
-(
-    bid         VARCHAR(20)    NOT NULL,
-    title       VARCHAR(60)    NOT NULL,
-    price       double         NOT NULL,
-    author      varchar(50)    not null,
-    category    ENUM ('Science','Fiction','Engineering','Maths','Modern','Kids') NOT NULL,
-    picture     varchar(1000)  not null,
-    description varchar(10000) not null default 'Welcome to Book World!',
-    sold        int                     default 0,
+CREATE TABLE Book (
+    bid         int   GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) not null,
+    title       VARCHAR(60)  NOT NULL,
+    price       double NOT NULL,
+    author      varchar(50)   not null,
+    
+   category varchar(20) CONSTRAINT category_ck CHECK (category IN ('Fiction', 'Science', 'Engineering', 'Maths','Modern','Kids')) NOT NULL,
+    picture     varchar(1000)    not null,
+    description varchar(10000)     not null default 'Welcome to Book World!',
+    sold int  default 0,
     PRIMARY KEY (bid),
-    constraint Sold check ( sold >= 0 )
+    constraint sold check ( sold >= 0 )
 );
-#
-# Adding data for table 'Book'
-#
-INSERT INTO Book
-VALUES ('b001', 'No Place Like Here', 21.99, 'Christina June', 'Science', 'def', 'def', 0),
-       ('b002', 'Educated', 12.99, 'Tara Westover', 'Maths', 'def', 'def', 0),
-       ('b003', 'Killing Hemingway', 8.99, 'Brian D. Meeks', 'Fiction', 'def', 'def', 0);
-#
-/* Address
-* id: address id
-*
-*/
+
+INSERT INTO Book ( title, price, author, category, picture) VALUES ( 'Educated', ' 5.99', ' Tara Westover',  'Fiction', 'assets/book-cover-1.jpg');
+
+INSERT INTO Book ( title, price, author, category, picture, sold) VALUES ( 'Dune', ' 59.99', ' Frank Herbert',  'Fiction', 'assets/book-cover-10.jpg', '2');
+
+INSERT INTO Book ( title, price, author, category, picture, description, sold) VALUES ( 'No Place Like Here', 21.99, 'Christina June', 'Science', 'assets/book-cover-12.jpg', 'def',  0);
+INSERT INTO Book ( title, price, author, category, picture, description, sold) VALUES ( 'Dog Flowers', 12.99, 'Danielle Geller', 'Fiction', 'assets/book-cover-8.jpg', 'def', 0);
+INSERT INTO Book ( title, price, author, category, picture, description, sold)  VALUES ( 'Harry Potter', 8.99, 'J.K Rowling', 'Kids', 'assets/book-cover-13.jpg', 'def', 0);
+INSERT INTO Book ( title, price, author, category, picture, description, sold)  VALUES ( 'The Outsider', 8.99, 'Stephen King', 'Fiction', 'assets/book-cover-9.jpg', 'def', 0);
+
+INSERT INTO Book (title, price, author, category, picture, description, sold)  VALUES ('Loner', '10.99', 'Georgina Young', 'Modern', 'assets/book-cover-4.jpg',  'def', 0);
+
+
+
+
+DROP TABLE USER;
+DROP TABLE Address;
+
+CREATE TABLE User
+(    id  int  unique  GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) not null,
+    fName    varchar(10) not null,
+    lName    varchar(20) not null,
+    email    varchar(30) not null,
+    password varchar(20) not null,
+    userType varchar(20) CONSTRAINT userType_ck CHECK (userType IN ('Costumer','Administrator','Partner')) NOT NULL Default 'Costumer',
+    primary key (id, fName, email)
+);
+
+
+INSERT INTO User (fName, lName, email, password) VALUES ('John', 'Oliver', 'johnoli@Canada.com', 'okey');
+INSERT INTO User (fName, lName, email, password, userType) VALUES ('Kyle', 'Lee', 'joe@gmail.com', 'okey', 'Administrator');
+INSERT INTO User (fName, lName, email, password, userType) VALUES ('Areeba', 'Arbidi', '12333@gmail.com', 'okey', 'Partner');
+
+
+
 CREATE TABLE Address
 (
-    id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    uId      int references User.id,
+    id       INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) not null,
+    uId      int references  User(id),
     street   VARCHAR(100) NOT NULL,
     province VARCHAR(20)  NOT NULL,
     country  VARCHAR(20)  NOT NULL,
@@ -58,147 +59,104 @@ CREATE TABLE Address
     phone    VARCHAR(20),
     PRIMARY KEY (id)
 );
-#
-# Inserting data for table 'address'
-#
-INSERT INTO Address (id, street, province, country, zip, phone)
-VALUES (1, '123 Yonge St', 'ON',
+
+INSERT INTO Address ( street, province, country, zip, phone)
+VALUES ( '123 Yonge St', 'ON',
         'Canada', 'K1E 6T5', '647-123-4567');
-INSERT INTO Address (id, street, province, country, zip, phone)
-VALUES (2, '445 Avenue rd', 'ON',
+INSERT INTO Address (street, province, country, zip, phone)
+VALUES ('445 Avenue rd', 'ON',
         'Canada', 'M1C 6K5', '416-123-8569');
-INSERT INTO Address (id, street, province, country, zip, phone)
-VALUES (3, '789 Keele St.', 'ON',
+INSERT INTO Address ( street, province, country, zip, phone)
+VALUES ('789 Keele St.', 'ON',
         'Canada', 'K3C 9T5', '416-123-9568');
-#
-#
-/* Purchase Order
-* lname: last name
-* fname: first name
-* id: purchase order id
-* status:status of purchase
-*/
-CREATE TABLE PO
-(
-    id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    uId     VARCHAR(20) NOT NULL references User.id,
-    status  ENUM ('ORDERED','PROCESSED','DENIED') NOT NULL,
-    address INT UNSIGNED NOT NULL,
+
+
+Drop Table PO;
+
+CREATE TABLE PO (
+    id      INT   NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+    uId     INT  NOT NULL references User(id),
+   status varchar(20) CONSTRAINT status_ck CHECK (status IN ('ORDERED','PROCESSED','DENIED')) NOT NULL,    
+    address INT NOT NULL constraint address check ( address >= 0 ),
+    purchaseDate varchar(20)  not null, 
     PRIMARY KEY (id),
-    INDEX (address),
     FOREIGN KEY (address) REFERENCES Address (id) ON DELETE CASCADE
 );
-#
-# Inserting data for table 'PO'
-#
-INSERT INTO PO (id, uId, status, address)
-VALUES (1, 1, 'PROCESSED', '1');
-INSERT INTO PO (id, uId, status, address)
-VALUES (2, 2, 'DENIED', '2');
-INSERT INTO PO (id, uId, status, address)
-VALUES (3, 2, 'ORDERED', '3');
-#
-#
-/* Items on order
-* id : purchase order id
-* bid: unique identifier of Book
-* price: unit price
-*/
+
+INSERT INTO PO ( uId, status, address, purchaseDate) VALUES ( 1, 'PROCESSED', '1', '1/1/2020');
+INSERT INTO PO ( uId, status, address, purchaseDate) VALUES ( 2, 'DENIED', '2','2/1/2021');
+INSERT INTO PO ( uId, status, address, purchaseDate) VALUES (2, 'ORDERED', '3', '3/4/2019');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE POItem;
+
 CREATE TABLE POItem
 (
-    id       INT UNSIGNED NOT NULL,
-    bid      VARCHAR(20) NOT NULL,
-    price    INT UNSIGNED NOT NULL,
-    quantity int unsigned not null default 1,
+    id       INT  NOT NULL  GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+    bid      int  NOT NULL,
+    price  double not null,
+    quantity int not null default 1,
     PRIMARY KEY (id, bid),
-    INDEX (id),
     FOREIGN KEY (id) REFERENCES PO (id) ON DELETE CASCADE,
-    INDEX (bid),
     FOREIGN KEY (bid) REFERENCES Book (bid) ON DELETE CASCADE,
+    
     constraint Quantity check ( quantity >= 1 )
 );
-#
-# Inserting data for table 'POitem'
-#
-INSERT INTO POItem (id, bid, price)
-VALUES (1, 'b001', '20');
-INSERT INTO POItem (id, bid, price)
-VALUES (2, 'b002', '201');
-INSERT INTO POItem (id, bid, price)
-VALUES (3, 'b003', '100');
-#
-#
-/* visit to website
-* day: date
-* bid: unique identifier of Book
-* eventtype: status of purchase
-*/
-CREATE TABLE VisitEvent
-(
-    day       varchar(8)  NOT NULL,
-    bid       varchar(20) not null REFERENCES Book.bid,
-    eventtype ENUM ('VIEW','CART','PURCHASE') NOT NULL,
-    FOREIGN KEY (bid) REFERENCES Book (bid)
-);
-#
-# Dumping data for table 'VisitEvent'
-#
-INSERT INTO VisitEvent (day, bid, eventtype)
-VALUES ('12202015', 'b001', 'VIEW');
-INSERT INTO VisitEvent (day, bid, eventtype)
-VALUES ('12242015', 'b001', 'CART');
-INSERT INTO VisitEvent (day, bid, eventtype)
-VALUES ('12252015', 'b001', 'PURCHASE');
 
-/*
-    User Table
-    uId: number
-    fName: First Name
-    lName: Last Name
-    email: User Email
-    password: User Password
- */
-CREATE TABLE User
-(
-    id       int         not null unique auto_increment,
-    fName    varchar(10) not null,
-    lName    varchar(20) not null,
-    email    varchar(30) not null,
-    password varchar(20) not null,
-    primary key (id, fName, email)
-);
-/*
- Payment Card Table
- id: ID
- uId: User Id that owns this payment card
- cardNumber: Card Number
- cvc: 3 digit pin
- expiryDate: Expiry Date of the Card
- */
-CREATE TABLE Card
-(
-    id         int         not null unique,
-    uId        int references User.id,
+
+INSERT INTO POItem (bid, price) VALUES (1, 12.99);
+INSERT INTO POItem ( bid, price) VALUES (2, 7.99);
+INSERT INTO POItem (bid, price) VALUES (3, 5.99);
+
+
+
+DROP TABLE VisitEvent;
+
+
+CREATE TABLE VisitEvent(
+    day varchar(20)  NOT NULL,
+    bid  int  not null REFERENCES Book(bid),
+     eventtype varchar(20) CONSTRAINT eventtype_ck CHECK (eventtype IN ('VIEW','CART','PURCHASE')) NOT NULL );
+
+
+
+
+INSERT INTO VisitEvent (day, bid, eventtype) VALUES ('12202015', '1', 'VIEW');
+INSERT INTO VisitEvent (day, bid, eventtype) VALUES ('12242015', '1', 'CART');
+INSERT INTO VisitEvent (day, bid, eventtype) VALUES ('12252015', '1', 'PURCHASE');
+
+
+
+
+DROP TABLE CARD;
+DROP TABLE REVIEW;
+CREATE TABLE Card (
+    id int not null  GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+    uId int references User(id) not null,
     cardNumber varchar(12) not null,
-    cvc        varchar(3)  not null,
-    expiryDate date        not null,
+    cvc   varchar(3)  not null,
+    expiryDate varchar(20)  not null,
     primary key (id, uId, cardNumber)
 );
 
-/*
- Review Table to store reviews and ratings for books
- id: ID
- bId: Book Id
- uID: Reviewer's ID
- rating: Rating out of 5
- subject: Short title of the review
- description: Review Content
- */
 CREATE TABLE Review
 (
-    id          int         not null unique,
-    bId         varchar(10) not null references Book.bId,
-    uId         int         not null references User.uId,
+    id   int  not null  GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+    bId  int not null references Book(bId),
+    uId  int  not null references User(Id),
     rating      double      not null,
     subject     varchar(100)  default 'Book Review',
     description varchar(1000) default 'Book is okay.',
@@ -206,11 +164,4 @@ CREATE TABLE Review
     constraint Rating CHECK ( rating >= 0 and rating <= 5)
 );
 
-/*
- Shopping Cart table
- NOTE: This table has the same fields as the PO Table.
- Depending on how the controller wants to implement it, we can have this table not necessary
- I suggest have this. So every time user checks out, the shopping cart fields get copied to the PO with status 'Purchased'
- and then get removed or set cells empty or null in this one. I guess have it removed and add another one with empty default fields I guess.
- Upto to the controller...
- */
+
