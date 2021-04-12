@@ -2,12 +2,12 @@ package bean;
 
 public class POBean {
     private int id;
-    private String userID;
+    private int userID;
     private String status;
     private int addressID;
     private String date;
 
-    public POBean(int id, String userID, String status, int addressID, String date) {
+    public POBean(int id, int userID, String status, int addressID, String date) {
         super();
         this.id = id;
         this.userID = userID;
@@ -24,11 +24,11 @@ public class POBean {
         this.id = id;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 

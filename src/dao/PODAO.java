@@ -30,7 +30,7 @@ public class PODAO extends DAO {
 
         while (r.next()) {
             int id = r.getInt("id");
-            String userID = r.getString("uId");
+            int userID = r.getInt("uId");
             String status = r.getString("status");
             int addressID = r.getInt("address");
             String date = r.getString("purchasedate");
@@ -136,27 +136,4 @@ public class PODAO extends DAO {
 
     }
 
-    public String getListOfPOItems(String bid) throws SQLException {
-        String query = "SELECT * FROM  POItem  INNER JOIN PO ON PO.id = POItem.id where bid = 'b001'";
-
-        Connection con = this.ds.getConnection();
-        PreparedStatement stmt = con.prepareStatement(query);
-
-        ResultSet r = stmt.executeQuery();
-        String result = "";
-        while (r.next()) {
-            int id = r.getInt("id");
-            String bookId = r.getString("bid");
-
-            result += id + bookId;
-
-            // create poitembean
-            // addressbean
-            //
-            //create OrderWrapper
-
-        }
-
-        return result;
-    }
 }

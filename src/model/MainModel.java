@@ -283,17 +283,35 @@ public class MainModel {
     }
 
     // getOrdersByPartNumber(bid)
-    public String getOrdersByPartNumber(String bid) {
+    public String getOrdersByPartNumber(String bid) throws SQLException, JAXBException, IOException {
 
-        // to be added
+        String result = "";
+    	ArrayList<POItemBean> poItems; 
+    	
+    	poItems= this.poDAO.retrievePOItemsByBookId(bid);
+    	ArrayList<OrderWrapper> wrapperList = new ArrayList<OrderWrapper>();
+    	if (poItems == null) return "No orders for the productId available";
+     	for (POItemBean item : poItems) {
+    		int pid =  item.getId();
+    		POBean po = this.getPObyId(pid);
+    		ArrayList<POItemBean> itemList = this.getPOItemsbyPOId(pid);
+    		wrapperList.add(new OrderWrapper(po.getDate(), this.addressDAO.retrieveAddressByUserId(po.getUserID()), this.addressDAO.retrieveAddressByUserId(po.getUserID()), itemList, pid, po.getUserID() ));
+     	}
+     	
+        for (OrderWrapper wrapper : wrapperList) {
+        	 JAXBContext jc = JAXBContext.newInstance(wrapper.getClass());
+             Marshaller marshaller = jc.createMarshaller();
+             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 
-        try {
-            return this.poDAO.getListOfPOItems(bid);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+             StringWriter sw = new StringWriter();
+             sw.write("\n");
+             marshaller.marshal(wrapper, new StreamResult(sw));
+
+             result += sw.toString();
         }
-        return null;
+        
+        return result;
     }
 
     /*
