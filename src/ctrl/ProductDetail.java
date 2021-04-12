@@ -45,7 +45,12 @@ public class ProductDetail extends HttpServlet {
         ArrayList<ReviewBean> reviews = MainModel.getInstance().getReviews(bid);
 
         //Loop through all reviews get avg of ratings
-        double rating = 4.5;
+        
+        double rating = 0;
+        for (ReviewBean review : reviews) {
+        	rating += review.getRating();
+        }
+        rating = rating / reviews.size();
 
         // Print the entire page
         result += "<div class = 'product-detail' id=\"product-detail\">\n" +
