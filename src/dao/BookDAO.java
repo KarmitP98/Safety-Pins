@@ -107,9 +107,30 @@ public class BookDAO extends DAO {
      * @throws SQLException
      */
     public BookBean FetchBookByID(String bookID) throws SQLException {
-        return (BookBean) this.fetchQuery("select * from Book where bid='" + bookID + "'", true);
+        return  (BookBean) this.fetchQuery("select * from Book where bid='" + bookID + "'", true);
     }
-
+    //testing
+    public BookBean retrieveByBookId(String bid) throws SQLException {
+    	String query = "select * from Book where bid = ?";
+    	Connection con = this.ds.getConnection();
+    	PreparedStatement p = con.prepareStatement(query);
+    	p.setString(1, bid);
+    	ResultSet r = p.executeQuery();
+    	BookBean book = null;
+    	while(r.next()) {
+    		String title = r.getString("title");
+    		double price = r.getDouble("price");
+    		String author = r.getString("author");
+    		String category = r.getString("category");
+    		String picture = r.getString("picture");
+    		String description = r.getString("description");
+    		int sold = r.getInt("sold");
+    		book = new BookBean(bid, title, price, author, category, picture, description, sold);
+    	}
+    	return book;
+    }
+    
+    
     public ArrayList<BookBean> fetchAllBooks() throws SQLException {
         return (ArrayList<BookBean>) this.fetchQuery("select * from Book", false);
     }
