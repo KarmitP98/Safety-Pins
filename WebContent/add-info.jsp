@@ -35,7 +35,7 @@
 </nav>
 <div class="main-content-area">
     <div class="add-info">
-        <div class="input-area">
+        <form class="input-area" action="info" method="get">
             <div class="title">Shipping Address</div>
             <fieldset id="ad_field">
                 <label for="addressLine">Address</label>
@@ -44,6 +44,7 @@
                         name="addressLine"
                         placeholder="Enter your address"
                         type="text"
+                        value=""
                 />
             </fieldset>
             <div class="city">
@@ -54,6 +55,7 @@
                             name="city"
                             placeholder="Sand City"
                             type="text"
+                            value=""
                     />
                 </fieldset>
                 <fieldset id="st_field">
@@ -63,6 +65,7 @@
                             name="state"
                             placeholder="Arizona"
                             type="text"
+                            value=""
                     />
                 </fieldset>
                 <fieldset id="con_field">
@@ -72,6 +75,7 @@
                             name="country"
                             placeholder="USA"
                             type="text"
+                            value=""
                     />
                 </fieldset>
             </div>
@@ -86,6 +90,7 @@
                         name="phone"
                         placeholder="+1-123-456-7890"
                         type="text"
+                        value=""
                 />
             </fieldset>
             <div class="title">Add a Payment Method</div>
@@ -96,12 +101,14 @@
                         name="card"
                         placeholder="1212 3434 5656"
                         type="text"
+                        value=""
                 />
             </fieldset>
             <div class="card-detail">
                 <fieldset id="cvs_field">
                     <label for="cvs">CVS</label>
-                    <input id="cvs" name="cvs" placeholder="789" type="number"/>
+                    <input id="cvs" name="cvs" placeholder="789" type="number"
+                           value=""/>
                 </fieldset>
                 <fieldset id="exp_field">
                     <label for="expiry">Expiry Date</label>
@@ -110,20 +117,13 @@
                             name="expiry"
                             placeholder="12/12/2020"
                             type="date"
+                            value=""
                     />
                 </fieldset>
             </div>
-        </div>
-        <div class="order-total">
-            <div class="card-title">
-                <b>Subtotal</b> (3 Items): <b>$ 131.93</b>
-            </div>
-            <div class="card-subtitle">Taxes will be calculated at checkout</div>
-            <br/><br/>
-            <div class="card-body">
-                <button class="button button-primary">Proceed to checkout</button>
-            </div>
-        </div>
+            <br>
+            <button type="submit" value="add" class="button-primary button">Add</button>
+        </form>
     </div>
 </div>
 </body>
