@@ -120,12 +120,12 @@ public class MainModel {
                 this.counterDAO.addCounter(userBean.getUserID());
                 System.out.println("A new user has been registered!");
 
-    
+
                 request.getSession().setAttribute("userSigningUp", userBean);
 
                 // deleted / for eclipse
-                response.sendRedirect("add-info.jsp");
-
+//                response.sendRedirect("add-info.jsp");
+                response.sendRedirect("home.jsp");
             } else
                 // deleted / for eclipse
                 response.sendRedirect("signup.html");
@@ -520,10 +520,10 @@ public class MainModel {
 
 
     public void addCard(HttpServletRequest request, String cardNumber, String cvc, String expiryDate) {
-    	UserBean userBean = (UserBean) request.getSession().getAttribute("user");
-   
-    	   if (userBean == null) 
-           	userBean = (UserBean) request.getSession().getAttribute("userSigningUp");
+        UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+
+        if (userBean == null)
+            userBean = (UserBean) request.getSession().getAttribute("userSigningUp");
 
         try {
             this.cardDAO.addCard(userBean.getUserID(), cardNumber, cvc, expiryDate);

@@ -127,10 +127,6 @@
     </div>
 </div>
 <script>
-    function addInfo()
-    {
-
-    }
 </script>
 </body>
 </html>
