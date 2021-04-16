@@ -232,41 +232,19 @@
         </div>
     </div>
 
-    <div class="order-detail-total">
-        <div class="card-title">
-            <b>Order Summary</b>
+    <div class="order-total">
+        <div class="card-title" id="order-title">
+            <b>Subtotal</b> (3 Items): <b>$ 131.93</b>
         </div>
+        <div class="card-subtitle">Taxes will be calculated at checkout</div>
+        <br/> <br/>
         <div class="card-body">
-            <div class="card-list">
-                <div class="card-list-item">
-              <span>4 Items</span
-              ><span class="values" id="price">$ 131.93</span>
-                </div>
-                <div class="card-list-item">
-              <span>Shipping</span
-              ><span class="values" id="shipping">$ 0.00</span>
-                </div>
-                <div class="list-partition"></div>
-                <div class="card-list-item">
-              <span id="tax_text">Total before taxes</span
-              ><span class="values" id="bTaxes">$ 131.93</span>
-                </div>
-                <div class="card-list-item">
-              <span>Est. GST/HST</span
-              ><span class="values" id="gst">$ 17.15</span>
-                </div>
-                <div class="card-list-item">
-              <span>Est. PST/QST</span
-              ><span class="values" id="pst">$ 0.00</span>
-                </div>
-                <div class="list-partition"></div>
-                <div class="card-list-item" id="order-total">
-              <span>Order Total</span
-              ><span class="values" id="total">$ 149.08</span>
-                </div>
-            </div>
+            <a href='<%= userBean!= null ? "reviewOrder.jsp":"login.html"%>'>
+                <button class="button button-primary">
+                    <%= userBean != null ? "Order Items" : "Login to Continue"%>
+                </button>
+            </a>
         </div>
-        <button class="button button-primary" onclick="orderItems()">Check Out</button>
     </div>
 </div>
 </body>
