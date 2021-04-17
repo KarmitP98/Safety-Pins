@@ -135,7 +135,7 @@ fieldset span {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: url("assets/book-background.jpg") center no-repeat;
+    background: url("../assets/book-background.jpg") center no-repeat;
     background-size: cover;
 }
 
@@ -225,7 +225,7 @@ fieldset span {
     width: -moz-fit-content;
     width: fit-content;
     height: 100vh;
-    background: url("assets/online-payment.svg") no-repeat center;
+    background: url("../assets/online-payment.svg") no-repeat center;
 }
 
 .add-info .input-area {
@@ -448,7 +448,7 @@ a {
     text-decoration: none;
 }
 
-a:visited{
+a:visited {
     color: var(--primary);
 }
 

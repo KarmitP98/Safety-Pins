@@ -78,7 +78,7 @@ public class ProductDetail extends HttpServlet {
                 "                    US $ " + bookBean.getPrice() + "\n" +
                 "                </div><br>\n" +
                 "                <button class=\"button button-primary\" onclick=\"addItemToCart(" + bookBean.getBid() + ")\">Add to Cart</button>\n" +
-                "<br><a href='home.jsp'><button class = 'button button-primary'>Back</button></a>"+
+                "<br><a href='dashboard.jsp'><button class = 'button button-primary'>Back</button></a>"+
                 "            </div>\n" +
                 "        </div>\n" +
                 "\n" +

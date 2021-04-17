@@ -1,0 +1,95 @@
+* {
+  font-family: "Epilogue", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #ce3737;
+  --darktext: #252525;
+  --background: #eeeeee;
+  --headings: #333333;
+  --success: #16e890;
+  --warning: #dbff00;
+  --shadow: #881e1e;
+
+  --z-4-16-red: 2px 2px 16px rgba(136, 30, 30, 0.5);
+  --z-4-16-black: 2px 2px 16px rgba(0, 0, 0, 0.1);
+  --z-4-16-success: 2px 2px 16px rgba(22, 232, 144, 0.5);
+}
+
+.button {
+  font-size: 1.1em;
+  font-weight: bold;
+
+  position: relative;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+  width: fit-content;
+
+  height: fit-content;
+
+  padding: 0.5em 1em;
+  cursor: pointer;
+  letter-spacing: 1px;
+
+  border: none;
+
+  border-radius: 500px;
+  background: transparent;
+
+  box-shadow: var(--z-4-16-black);
+
+}
+
+.button-primary {
+  color: white;
+  background: var(--primary);
+
+  box-shadow: var(--z-4-16-red);
+}
+
+.button-success{
+  color: black;
+  background: var(--success);
+
+  box-shadow: var(--z-4-16-success);
+}
+
+fieldset {
+  display: flex;
+  position: relative;
+
+  align-items: center;
+
+  border: none;
+
+  background: white;
+
+  border-radius: 500px;
+
+  overflow: hidden;
+
+  padding: 0.1em 0.5em;
+}
+
+fieldset > input {
+  border: none;
+
+  padding: 0.5em 1em;
+
+  background: white;
+
+  font-size: 1.2em;
+  font-weight: 500;
+
+  border-radius: 500px;
+}
+
+input:active, input:focus {
+  outline: none;
+}

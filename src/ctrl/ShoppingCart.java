@@ -67,7 +67,7 @@ public class ShoppingCart extends HttpServlet {
         }
 
         response.getWriter().write(cart.size() > 0 ? result.toString() : "There are no items in you cart. <br><br>" +
-                "<h1><a href='home.jsp'>Browse our catalogue</a>");
+                "<h1><a href='dashboard.jsp'>Browse our catalogue</a>");
     }
 
     private String getItem(BookBean book, int number) {

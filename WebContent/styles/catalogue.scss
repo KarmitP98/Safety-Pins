@@ -1,0 +1,14 @@
+.content {
+  position: relative;
+  display: flex;
+
+  align-items: flex-start;
+  flex-flow: row wrap;
+
+  justify-content: space-evenly;
+
+  width: 50vw;
+  height: fit-content;
+
+  background: var(--background);
+}

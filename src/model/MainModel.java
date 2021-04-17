@@ -72,7 +72,7 @@ public class MainModel {
             // If Visitor || Customer
             // deleted / for eclipse
             if (user.getUserType().equals("Customer"))
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("dashboard.jsp");
 
                 // If Admin
                 // Redirect to report-page.html
@@ -87,7 +87,7 @@ public class MainModel {
                 // Redirect to the rest service page
             else {
                 //redirect to home temporarily
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("dashboard.jsp");
             }
 
 
@@ -125,7 +125,7 @@ public class MainModel {
 
                 // deleted / for eclipse
 //                response.sendRedirect("add-info.jsp");
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("dashboard.jsp");
             } else
                 // deleted / for eclipse
                 response.sendRedirect("signup.html");
@@ -217,6 +217,7 @@ public class MainModel {
 
     public ArrayList<BookBean> getAllBooks() {
         try {
+            System.out.println("MainModel.getAllBooks");
             return this.bookDAO.fetchAllBooks();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="styles.css" rel="stylesheet"/>
+    <link href="../../styles/styles.css" rel="stylesheet"/>
     <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="cart.js"></script>
-    <script type="javascript" src="order-review.js"></script>
+    <script type="text/javascript" src="../../js/cart.js"></script>
+    <script type="javascript" src="../../js/order-review.js"></script>
     <title>Product Detail</title>
 </head>
 <body>

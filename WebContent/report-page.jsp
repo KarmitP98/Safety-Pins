@@ -12,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="styles.css" rel="stylesheet"/>
+    <link href="../../styles/styles.css" rel="stylesheet"/>
     <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
@@ -29,7 +29,7 @@
 <nav>
     <div class="navbar">
         <div id="logo">
-            <img alt="Red Logo" src="assets/logo-red-bg.png"/>
+            <img alt="Red Logo" src="../../assets/logo-red-bg.png"/>
         </div>
         <div class="options-area">
             <a href="logout">
@@ -58,56 +58,57 @@
                         "                <td>" + bookBean.getAuthor() + "</td>\n" +
                         "                <td>" + bookBean.getQuantitySold() + "</td>\n" +
                         "            </tr>";
-            };
+            }
+            ;
 
-            result+="</table>";
+            result += "</table>";
 
             out.print(result);
         %>
-<%--        <table>--%>
-<%--            <tr>--%>
-<%--                <th>Number</th>--%>
-<%--                <th>Book ID</th>--%>
-<%--                <th>Book Name</th>--%>
-<%--                <th>Author</th>--%>
-<%--                <th>Sold</th>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>1</td>--%>
-<%--                <td>BID</td>--%>
-<%--                <td>Name</td>--%>
-<%--                <td>1</td>--%>
-<%--                <td>1</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>1</td>--%>
-<%--                <td>BID</td>--%>
-<%--                <td>Name</td>--%>
-<%--                <td>1</td>--%>
-<%--                <td>1</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>1</td>--%>
-<%--                <td>BID</td>--%>
-<%--                <td>Name</td>--%>
-<%--                <td>1</td>--%>
-<%--                <td>1</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>1</td>--%>
-<%--                <td>BID</td>--%>
-<%--                <td>Name</td>--%>
-<%--                <td>1</td>--%>
-<%--                <td>1</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>1</td>--%>
-<%--                <td>BID</td>--%>
-<%--                <td>Name</td>--%>
-<%--                <td>1</td>--%>
-<%--                <td>1</td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
+        <%--        <table>--%>
+        <%--            <tr>--%>
+        <%--                <th>Number</th>--%>
+        <%--                <th>Book ID</th>--%>
+        <%--                <th>Book Name</th>--%>
+        <%--                <th>Author</th>--%>
+        <%--                <th>Sold</th>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>BID</td>--%>
+        <%--                <td>Name</td>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>1</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>BID</td>--%>
+        <%--                <td>Name</td>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>1</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>BID</td>--%>
+        <%--                <td>Name</td>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>1</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>BID</td>--%>
+        <%--                <td>Name</td>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>1</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>BID</td>--%>
+        <%--                <td>Name</td>--%>
+        <%--                <td>1</td>--%>
+        <%--                <td>1</td>--%>
+        <%--            </tr>--%>
+        <%--        </table>--%>
     </div>
 </div>
 <script>

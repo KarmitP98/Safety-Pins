@@ -40,11 +40,11 @@ async function updateQuantity(bid, number) {
         getTotalPrice();
     });
 }
-function orderItems()
-{
+
+function orderItems() {
     address = document.getElementById("address")
     $.ajax({
-        type:'get',
+        type: 'get',
         url: 'order-items'
     })
 }

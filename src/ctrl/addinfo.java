@@ -55,7 +55,7 @@ public class addinfo extends HttpServlet {
 
         if (request.getSession().getAttribute("userSigningUp") != null) {
             request.getSession().setAttribute("userSigningUp", null);
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("dashboard.jsp");
         } else {
             response.sendRedirect("reviewOrder.jsp");
         }

@@ -8,22 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="styles.css" rel="stylesheet"/>
+    <link href="styles/styles.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="cart.js" type="text/javascript"></script>
+    <script src="js/cart.js" type="text/javascript"></script>
     <title>Shopping Cart</title>
 </head>
 <body>
 <% UserBean userBean = (UserBean) request.getSession().getAttribute("user");%>
 <nav>
     <div class="navbar">
-        <a href="home.jsp" id="logo">
+        <a href="dashboard.jsp" id="logo">
             <img alt="Red Logo" src="assets/logo-red-bg.png"/>
         </a>
         <div class="options-area">
-            <a href="home.jsp">
+            <a href="dashboard.jsp">
                 <div class="cart-btn">
                     <span class="material-icons">home </span>
                 </div>

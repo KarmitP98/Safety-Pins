@@ -15,11 +15,14 @@
       onload="disableBackButton()">
 <h1>Uhh Oh! Your card information is invalid!</h1>
 <br>
-<a href="cart.jsp"><button>Retry</button></a>
+<a href="cart.jsp">
+    <button>Retry</button>
+</a>
 <script type="text/javaScript">
     function disableBackButton() {
         window.history.forward();
     }
+
     setTimeout("disableBackButton()", 0);
 </script>
 

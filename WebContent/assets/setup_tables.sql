@@ -36,8 +36,9 @@ CREATE TABLE Book
     constraint Sold check ( sold >= 0 )
 );
 #
-# Adding data for table 'Book'
-#
+# Adding data
+for table 'Book'
+    #
 INSERT INTO Book
 VALUES ('b001', 'No Place Like Here', 21.99, 'Christina June', 'Science', 'def', 'def', 0),
        ('b002', 'Educated', 12.99, 'Tara Westover', 'Maths', 'def', 'def', 0),
@@ -59,8 +60,9 @@ CREATE TABLE Address
     PRIMARY KEY (id)
 );
 #
-# Inserting data for table 'address'
-#
+# Inserting data
+for table 'address'
+    #
 INSERT INTO Address (id, street, province, country, zip, phone)
 VALUES (1, '123 Yonge St', 'ON',
         'Canada', 'K1E 6T5', '647-123-4567');
@@ -85,12 +87,13 @@ CREATE TABLE PO
     status  ENUM ('ORDERED','PROCESSED','DENIED') NOT NULL,
     address INT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
-    INDEX (address),
+    INDEX ( address),
     FOREIGN KEY (address) REFERENCES Address (id) ON DELETE CASCADE
 );
 #
-# Inserting data for table 'PO'
-#
+# Inserting data
+for table 'PO'
+    #
 INSERT INTO PO (id, uId, status, address)
 VALUES (1, 1, 'PROCESSED', '1');
 INSERT INTO PO (id, uId, status, address)
@@ -111,15 +114,16 @@ CREATE TABLE POItem
     price    INT UNSIGNED NOT NULL,
     quantity int unsigned not null default 1,
     PRIMARY KEY (id, bid),
-    INDEX (id),
+    INDEX ( id),
     FOREIGN KEY (id) REFERENCES PO (id) ON DELETE CASCADE,
     INDEX (bid),
     FOREIGN KEY (bid) REFERENCES Book (bid) ON DELETE CASCADE,
     constraint Quantity check ( quantity >= 1 )
 );
 #
-# Inserting data for table 'POitem'
-#
+# Inserting data
+for table 'POitem'
+    #
 INSERT INTO POItem (id, bid, price)
 VALUES (1, 'b001', '20');
 INSERT INTO POItem (id, bid, price)
@@ -141,8 +145,9 @@ CREATE TABLE VisitEvent
     FOREIGN KEY (bid) REFERENCES Book (bid)
 );
 #
-# Dumping data for table 'VisitEvent'
-#
+# Dumping data
+for table 'VisitEvent'
+    #
 INSERT INTO VisitEvent (day, bid, eventtype)
 VALUES ('12202015', 'b001', 'VIEW');
 INSERT INTO VisitEvent (day, bid, eventtype)

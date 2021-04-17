@@ -1,0 +1,44 @@
+::-webkit-scrollbar{
+  display: none;
+}
+
+.category {
+  display: flex;
+
+  flex-flow: column;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 25vw;
+  height: 100%;
+
+  overflow: hidden;
+
+  padding: 2em;
+}
+
+.title {
+  margin: 2vw 0;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+form{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  align-items: center;
+}
+
+select, select > option{
+  padding: 0.5em;
+  border: none;
+  font-size: 1.2em;
+  font-weight: 500;
+  border-radius: 500px;
+}
+
+select:focus, select:active {
+  outline: none;
+}

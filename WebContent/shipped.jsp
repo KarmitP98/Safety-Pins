@@ -13,7 +13,7 @@
 <body style="display: flex; width: 100%;height: 100%; justify-content:center;align-items: center;"
       onload="disableBackButton()">
 <h1>Congratulations your order has been shipped!</h1>
-<a href="home.jsp"><h1>Browse more books</h1></a>
+<a href="dashboard.jsp"><h1>Browse more books</h1></a>
 <script type="text/javaScript">
     function disableBackButton() {
         window.history.forward();
