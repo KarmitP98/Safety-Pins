@@ -8,8 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/common.scss">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/item-card.scss">
+    <script src="${pageContext.request.contextPath}/js/func.js" type="application/javascript"></script>
     <title>Item Card</title>
 </head>
 <body>
@@ -38,8 +40,12 @@
         </div>
     </div>
     <div class="card-action">
-        <span class="material-icons" id="open">open_in_full</span>
-        <span class="material-icons" id="cart">add_shopping_cart</span>
+        <a href='<%="item-detail?bid=" + request.getParameter("bid")%>'>
+            <div class="material-icons" id="open">open_in_full</div>
+        </a>
+        <div class="material-icons" id="cart" onclick="addToCart('<%=request.getParameter("bid")%>')">
+            add_shopping_cart
+        </div>
     </div>
 </div>
 </body>

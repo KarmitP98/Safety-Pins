@@ -149,17 +149,20 @@ public class MainModel {
      * Cart
      */
 
-    public void addToCart(String bid, HttpServletRequest request) {
+    public boolean addToCart(String bid, HttpServletRequest request) {
+
         BookBean book = this.getBookById(bid);
+
         HashMap<BookBean, Integer> cart = this.getCart(request);
 
-        int quantity = 1;
         if (cart.containsKey(book)) {
-            quantity = cart.get(book) + 1;
+            cart.replace(book, cart.get(book) + 1);
+            request.getSession().setAttribute("cart", cart);
+            return false;
         }
-        cart.put(book, quantity);
-        System.out.println("cart = " + cart);
+        cart.put(book, 1);
         request.getSession().setAttribute("cart", cart);
+        return true;
     }
 
     public void removeFromCart(String bid, HttpServletRequest request) {

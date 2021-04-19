@@ -14,11 +14,11 @@
 
   padding: 1em;
 
+  border: 1px solid black;
   border-radius: 10px;
 
   background: var(--background);
-
-  box-shadow: var(--z-4-16-black);
+  //box-shadow: var(--z-4-16-black);
 }
 
 .card-body {
@@ -71,7 +71,7 @@
 }
 
 #cart {
-  color: var(--success)
+  color: var(--primary)
 }
 
 .book-rating > p {
